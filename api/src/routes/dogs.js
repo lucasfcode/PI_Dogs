@@ -2,24 +2,8 @@ var express = require("express");
 var router = express.Router();
 const axios = require("axios");
 const { YOUR_API_KEY } = process.env;
-const { conn } = require("../db.js");
-const bodyParser = require("body-parser");
-const { Breed, Temper } = conn.models;
+const { conn, Breed, Temperament, BreedTemp } = require("../db.js");
 //GET https://api.thedogapi.com/v1/breeds
-
-// const getAllDogsApi = async () => {
-//   let allBreeds = await axios(
-//     `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
-//   );
-//   return allBreeds.data;
-// };
-
-// const getAllDogsDb = async () => {
-//   let allDogsDb = await Breed.findAll({
-//     include: Temper,
-//   });
-//   return allDogsDb;
-// };
 
 /* GET home page. */
 router.get("/", (req, res) => {
@@ -28,7 +12,6 @@ router.get("/", (req, res) => {
     axios(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`)
       .then((d) => {
         let mapped = d.data.map((r) => r.name);
-        console.log("mapped", mapped);
         let filtred = mapped.filter((n) =>
           n.toUpperCase().includes(name.toUpperCase())
         );
@@ -46,9 +29,24 @@ router.get("/", (req, res) => {
   }
   //en caso de que no busquen por query, devolverá todas las razas
   else {
-    axios(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`)
-      .then((r) => res.status(200).json(r.data.map((d) => d.name)))
-      .catch((err) => console.log(err));
+    Promise.all([
+      axios(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`),
+      Breed.findAll({
+        include: {
+          model: Temperament,
+        },
+      }),
+    ])
+      .then((r) => {
+        let apiDogs = r[0].data.map((d) => d.name);
+        let dbDogs = r[1].map((d) => d.name);
+        // let allDogs = dbDogs.concat(apiDogs);
+        res.json([...dbDogs, ...apiDogs]);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(404).send(err);
+      });
   }
 });
 
@@ -58,7 +56,10 @@ router.get("/:idRaza", async (req, res) => {
     let all = await axios(
       `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
     );
-    let justOne = await all.data.find((e) => e.id == idRaza);
+    let justOne = await all.data.find(
+      (e) => parseInt(e.id) === parseInt(idRaza)
+    );
+
     res.json({
       id: justOne.id,
       name: justOne.name,
@@ -69,23 +70,33 @@ router.get("/:idRaza", async (req, res) => {
       image: justOne.image.url,
     });
   } catch (err) {
-    console.log(err);
+    console.log("errorrrrr", err);
+    res.status(200).send("El el id no ha sido encontrado");
   }
 });
 //POSTT
 router.post("/", async (req, res) => {
   try {
-    let dog = await Breed.findOrCreate({
+    const { name, height, weight, yearsOfLife, image, temperaments } = req.body;
+    let newDog = await Breed.findOrCreate({
       where: {
-        name: req.body.name,
-        height: req.body.height,
-        weight: req.body.weight,
-        yearsOfLife: req.body.yearsOfLife,
+        name,
+        height,
+        weight,
+        yearsOfLife,
+        image,
       },
     });
-    res.status(202).json(dog);
+    //trae temperamentos que coincidan con los que he recibido
+    let tempDB = await Temperament.findAll({
+      where: { name: temperaments },
+    });
+    await newDog[0].setTemperaments(tempDB);
+
+    res.status(202).json(newDog);
   } catch (err) {
     console.log(err);
+    res.status(404).send(err);
   }
 });
 

@@ -10,19 +10,30 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
+      image: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       height: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       weight: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.STRING,
+        set(value) {
+          this.setDataValue("weight", value + " cm");
+        },
       },
       yearsOfLife: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
+      },
+      database: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     },
     { timestamps: false }

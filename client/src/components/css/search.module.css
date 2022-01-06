@@ -1,0 +1,20 @@
+.show {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 94vh;
+  justify-content: center;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+.input_1 {
+  padding: 1%;
+}
+.searching {
+  background-color: white;
+
+  margin: 0 auto;
+  width: 200px;
+}

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSearchedDogs } from "../redux/actions";
 import s from "./css/search.module.css";
 import Dog from "./Dog";
-import Searching from "./Searching";
 
 export default function SearchBar() {
   const [searching, setSearching] = React.useState({
@@ -21,7 +20,6 @@ export default function SearchBar() {
     setSearching({ state: "" });
   };
 
-  console.log("searchedREduxAfter", stateRedux);
   //retuuuuur -------------------------------
   return (
     <div>
@@ -34,25 +32,13 @@ export default function SearchBar() {
       <button className={s.input_1} onClick={(e) => handlerSubmit(e)}>
         Buscar
       </button>
-      {/* ----------------searching div-------------- */}
-      {searching.state.length && (
-        <div className={s.searching}>
-          {stateRedux.dogs
-            .filter((e) =>
-              e.name.toUpperCase().includes(searching.state.toUpperCase())
-            )
-            .map((dog) => (
-              <Searching name={dog.name} key={dog.id} />
-            ))}
-        </div>
-      )}
+      <select>
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
+      {/* paginado----------- */}
 
-      <div className={s.show}>
-        {stateRedux.state &&
-          stateRedux.state.map((e) => {
-            return <Dog stateRedux={e} key={e.id} />;
-          })}
-      </div>
+      {/* ----------------searching div-------------- */}
     </div>
   );
 }

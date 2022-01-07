@@ -1,12 +1,14 @@
 .show {
   display: flex;
+  margin: 0 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   height: 94vh;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: auto;
   scroll-behavior: smooth;
+  width: 80%;
 }
 
 .input_1 {

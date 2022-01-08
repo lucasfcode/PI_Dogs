@@ -3,6 +3,8 @@ import {
   GET_TEMPERAMENT,
   GET_SEARCHED_DOGS,
   FILTER_BY_TEMPERAMENT,
+  ASCENDENT,
+  DESCENDENT,
 } from "../actions";
 import {} from "../actions";
 
@@ -31,9 +33,66 @@ export default function rootReducer(state = initialState, action) {
         searched: action.payload,
       };
     case FILTER_BY_TEMPERAMENT:
+      const filter = state.dogs.filter((dog) => {
+        //dogs.temperament--> string
+        //action.payload--> array
+        //cada elemento del payload debe existir en las temps del dog. Es un concicional &&
+        //tempr to array
+        let tempToArr =
+          dog.temperament &&
+          dog.temperament.split(",").map((e) => e.toUpperCase().trim());
+        //filter &&
+        if (tempToArr) {
+          let mapsOfTrue = action.payload.every((temperament) =>
+            tempToArr.includes(temperament)
+          );
+          mapsOfTrue &&
+            console.log(
+              mapsOfTrue,
+              dog.name,
+              "posee: ",
+              tempToArr,
+              "y los filtros son: ",
+              action.payload
+            );
+          return mapsOfTrue;
+        } else {
+          console.log(dog.name, "no tiene temperamentos", dog.temperament);
+          return false;
+        }
+
+        //filtros OR
+        // if (tempToArr) {
+        //   let mapsOfTrue = tempToArr.some((temperament) =>
+        //     //este temp incluye en los temp marcados por el user?
+        //     action.payload.includes(temperament)
+        //   );
+        //   console.log("mapofTrue", mapsOfTrue);
+        //   return mapsOfTrue;
+        // } else {
+        //   console.log(dog.name, "no tiene temperamentos", dog.temperament);
+        //   return false;
+        // }
+      });
       return {
         ...state,
-        filtered: action.payload,
+        filtered: filter,
+      };
+    case ASCENDENT:
+      let ordened = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
+      console.log("ordened", ordened);
+      return {
+        ...state,
+        filtered: ordened,
+      };
+    case DESCENDENT:
+      let descendent = state.filtered.sort((a, b) =>
+        a.name < b.name ? 1 : -1
+      );
+      console.log("descendent", descendent);
+      return {
+        ...state,
+        filtered: descendent,
       };
     default:
       return { ...state };

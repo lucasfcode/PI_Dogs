@@ -1,44 +1,59 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByTemp } from "../redux/actions";
+import {
+  filterByTemp,
+  getAllDogs,
+  ascOrder,
+  descOrder,
+} from "../redux/actions";
 import s from "./css/filters.module.css";
 
 export function Filters({ setCurrentPage }) {
   const temperaments = useSelector((state) => state.temperaments);
-  const allDogs = useSelector((state) => state.filtered);
+  let tempsOrdened = temperaments.map((e) => e.name).sort();
   const dispatcher = useDispatch();
   const [selected, setSelected] = React.useState([]);
+  const [checkControlled, setCheckControlled] = React.useState([]);
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
+
   const checkHandler = (event) => {
     let temp = event.target;
     let name = temp.name.toUpperCase();
-
     temp.checked
       ? setSelected((prev) => [...prev, name])
       : setSelected((prev) => prev.filter((e) => e !== name));
-
-    //Arreglo principal incluye  alguno de los elementos del array checked?
-    //recorremos mi array de condiciones y en cada elemento preguntamos si está incluido en al menos un elemento del segundo array (temperaments)
-    // recorro cada dog--> en cada dog pregunto si existe algun elemento de selected en los temperamentos del dog acual.
-    //esta funcion me costó
-
-    let filtered = allDogs.filter((dog) => {
-      let dTemp = dog.temperament.map((e) => e.toUpperCase());
-        console.log("dTemp", dTemp);
-      return selected.some(
-        (temp) => dTemp.length && dTemp.includes(temp))
-      )
-    });
-    console.log("filteredddd", filtered);
-    // dispatcher(filterByTemp(filtered));
   };
-  console.log(selected);
-
+  const applyHandler = () => {
+    console.log("Aplicando Cambios");
+    selected.length
+      ? dispatcher(filterByTemp(selected))
+      : getAllDogs(dispatcher);
+  };
+  const resetHandler = () => {
+    console.log("Filtros reseteados");
+    getAllDogs(dispatcher);
+  };
+  console.log(checkControlled);
+  const orderHandler = (value) => {
+    console.log("value order", value);
+    value === "asc"
+      ? dispatcher(ascOrder())
+      : value === "desc"
+      ? dispatcher(descOrder())
+      : console.log("error en orderHandler");
+  };
   return (
     <div className={s.filter_box}>
-      <select className={s.select}>
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
+      <select
+        onChange={(e) => orderHandler(e.target.value)}
+        className={s.select}
+      >
+        <option key={"asc"} value="asc">
+          Ascendente
+        </option>
+        <option key={"desc"} value="desc">
+          Descendente
+        </option>
       </select>
 
       <select className={s.select}>
@@ -52,23 +67,26 @@ export function Filters({ setCurrentPage }) {
         <br />
 
         <br />
-        {temperaments.length ? (
-          temperaments.map((t) => (
-            <>
-              <label key={t.id} className={s.label}>
-                <input
-                  onChange={(e) => checkHandler(e)}
-                  type="checkbox"
-                  key={t.id}
-                  name={t.name}
-                />
-                {t.name}
-              </label>
-            </>
+        {/* ---------Filtrar por temperamento */}
+        {tempsOrdened.length ? (
+          tempsOrdened.map((t, id) => (
+            <label key={id} className={s.label}>
+              <input
+                onChange={(e) => checkHandler(e)}
+                type="checkbox"
+                key={id * 2}
+                name={t}
+              />
+              {t}
+            </label>
           ))
         ) : (
           <span>No se recuperaron los temperamentos</span>
         )}
+      </div>
+      <div>
+        <button onClick={applyHandler}>Aplicar</button>
+        <button onClick={resetHandler}>Resetear</button>
       </div>
     </div>
   );

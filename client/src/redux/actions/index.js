@@ -2,6 +2,8 @@ export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_TEMPERAMENT = "GET_TEMPERAMENT";
 export const GET_SEARCHED_DOGS = "GET_SEARCHED_DOGS";
 export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
+export const ASCENDENT = "ASCENDENT";
+export const DESCENDENT = "DESCENDENT";
 
 export const getAllDogs = (dispatch) => {
   return fetch(`http://localhost:3001/dogs`)
@@ -42,6 +44,18 @@ export const getSearchedDogs = (toSearch) => {
 export const filterByTemp = (value) => {
   return {
     type: FILTER_BY_TEMPERAMENT,
+    payload: value,
+  };
+};
+export const ascOrder = (value) => {
+  return {
+    type: ASCENDENT,
+    payload: value,
+  };
+};
+export const descOrder = (value) => {
+  return {
+    type: DESCENDENT,
     payload: value,
   };
 };

@@ -4,13 +4,11 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  height: 94vh;
-  justify-content: flex-start;
-  overflow: auto;
-  scroll-behavior: smooth;
   width: 80%;
 }
-
+.searchbar_box {
+  width: 100%;
+}
 .input_1 {
   padding: 1%;
 }

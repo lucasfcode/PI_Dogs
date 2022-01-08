@@ -1,6 +1,7 @@
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_TEMPERAMENT = "GET_TEMPERAMENT";
 export const GET_SEARCHED_DOGS = "GET_SEARCHED_DOGS";
+export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
 
 export const getAllDogs = (dispatch) => {
   return fetch(`http://localhost:3001/dogs`)
@@ -15,7 +16,7 @@ export const getAllDogs = (dispatch) => {
 };
 
 export const getTemperaments = (dispatch) => {
-  return fetch(`http://localhost:3000/temperament`)
+  return fetch(`http://localhost:3001/temperament`)
     .then((response) => response.json())
     .then((json) => {
       dispatch({
@@ -35,5 +36,12 @@ export const getSearchedDogs = (toSearch) => {
           payload: json,
         });
       });
+  };
+};
+
+export const filterByTemp = (value) => {
+  return {
+    type: FILTER_BY_TEMPERAMENT,
+    payload: value,
   };
 };

@@ -5,6 +5,7 @@ import sSearch from "./css/search.module.css";
 import Pages from "./Pages";
 import { useSelector } from "react-redux";
 import Dog from "./Dog";
+import { Filters } from "./Filters";
 
 export default function Home() {
   const reduxState = useSelector((state) => state);
@@ -12,17 +13,17 @@ export default function Home() {
   const render = 8;
   const lastPageIndex = currentPage * render;
   const firstPageIndex = lastPageIndex - render;
-  const currentRender = reduxState.dogs.slice(firstPageIndex, lastPageIndex);
+  const currentRender = reduxState.filtered.slice(
+    firstPageIndex,
+    lastPageIndex
+  );
 
   return (
     <div className={sHome.home}>
       <Search />
-      <Pages
-        setCurrentPage={setCurrentPage}
-        allDogs={reduxState.dogs}
-        render={render}
-        currentPage={currentPage}
-      />
+
+      <Filters />
+
       {
         <div className={sSearch.show}>
           {currentRender.length &&
@@ -31,6 +32,12 @@ export default function Home() {
             })}
         </div>
       }
+      <Pages
+        setCurrentPage={setCurrentPage}
+        allDogs={reduxState.filtered}
+        render={render}
+        currentPage={currentPage}
+      />
     </div>
   );
 }

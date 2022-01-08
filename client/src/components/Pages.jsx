@@ -7,6 +7,7 @@ export default function Pages({
   render,
   currentPage,
 }) {
+  console.log();
   const pageNumbers = allDogs
     .map((e, index) => index + 1)
     .slice(0, Math.ceil(allDogs.length / render));
@@ -15,8 +16,9 @@ export default function Pages({
     <div className={s.pages}>
       <ul>
         {pageNumbers.length &&
-          pageNumbers.map((number) => (
+          pageNumbers.map((number, i) => (
             <li
+              key={i}
               onClick={() => setCurrentPage(number)}
               className={currentPage === number ? s.active : ""}
             >

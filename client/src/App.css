@@ -10,8 +10,8 @@ body {
 }
 .App {
   text-align: center;
-  min-height: 99vh;
   display: flex;
   justify-content: center;
+  flex-flow: row wrap;
   align-items: center;
 }

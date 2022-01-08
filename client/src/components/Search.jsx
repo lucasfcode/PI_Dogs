@@ -22,7 +22,7 @@ export default function SearchBar() {
 
   //retuuuuur -------------------------------
   return (
-    <div>
+    <div className={s.searchbar_box}>
       <input
         className={s.input_1}
         value={searching.state}
@@ -32,10 +32,7 @@ export default function SearchBar() {
       <button className={s.input_1} onClick={(e) => handlerSubmit(e)}>
         Buscar
       </button>
-      <select>
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-      </select>
+
       {/* paginado----------- */}
 
       {/* ----------------searching div-------------- */}

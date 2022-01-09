@@ -5,12 +5,13 @@ import sSearch from "./css/search.module.css";
 import Pages from "./Pages";
 import { useSelector } from "react-redux";
 import Dog from "./Dog";
-
+import NotFound from "./NotFound";
 import { Filters } from "./Filters";
 
 export default function Home() {
   const reduxState = useSelector((state) => state);
   const [currentPage, setCurrentPage] = React.useState(1);
+
   const render = 8;
   const lastPageIndex = currentPage * render;
   const firstPageIndex = lastPageIndex - render;
@@ -26,10 +27,13 @@ export default function Home() {
 
       {
         <div className={sSearch.show}>
-          {currentRender.length &&
+          {currentRender.length ? (
             currentRender.map((e) => {
               return <Dog aDog={e} key={e.id} />;
-            })}
+            })
+          ) : (
+            <NotFound />
+          )}
         </div>
       }
       <Pages

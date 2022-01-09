@@ -5,7 +5,7 @@ import Entry from "./components/Entry";
 import CreateDog from "./components/CreateDog";
 import { getAllDogs, getTemperaments } from "./redux/actions";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();

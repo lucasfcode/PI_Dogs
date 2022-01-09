@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSearchedDogs } from "../redux/actions";
 import s from "./css/search.module.css";
-import Dog from "./Dog";
 
 export default function SearchBar() {
   const [searching, setSearching] = React.useState({

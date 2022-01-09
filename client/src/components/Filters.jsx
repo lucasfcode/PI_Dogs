@@ -1,10 +1,14 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterByTemp,
   getAllDogs,
   ascOrder,
   descOrder,
+  getCreated,
+  getOnlyApi,
 } from "../redux/actions";
 import s from "./css/filters.module.css";
 
@@ -13,9 +17,15 @@ export function Filters({ setCurrentPage }) {
   let tempsOrdened = temperaments.map((e) => e.name).sort();
   const dispatcher = useDispatch();
   const [selected, setSelected] = React.useState([]);
-  const [checkControlled, setCheckControlled] = React.useState([]);
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
-
+  const createdHandler = (value) => {
+    console.log("from createdH", value);
+    value === "created"
+      ? dispatcher(getCreated())
+      : value === "api"
+      ? dispatcher(getOnlyApi())
+      : getAllDogs(dispatcher);
+  };
   const checkHandler = (event) => {
     let temp = event.target;
     let name = temp.name.toUpperCase();
@@ -33,7 +43,7 @@ export function Filters({ setCurrentPage }) {
     console.log("Filtros reseteados");
     getAllDogs(dispatcher);
   };
-  console.log(checkControlled);
+
   const orderHandler = (value) => {
     console.log("value order", value);
     value === "asc"
@@ -56,7 +66,10 @@ export function Filters({ setCurrentPage }) {
         </option>
       </select>
 
-      <select className={s.select}>
+      <select
+        onChange={(e) => createdHandler(e.target.value)}
+        className={s.select}
+      >
         <option value="all">Todos</option>
         <option value="api">Api</option>
         <option value="created">Creados</option>
@@ -88,6 +101,7 @@ export function Filters({ setCurrentPage }) {
         <button onClick={applyHandler}>Aplicar</button>
         <button onClick={resetHandler}>Resetear</button>
       </div>
+      <NavLink to="/home/create">Crear Perro</NavLink>
     </div>
   );
 }

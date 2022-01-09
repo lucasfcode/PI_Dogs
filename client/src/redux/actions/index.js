@@ -4,6 +4,8 @@ export const GET_SEARCHED_DOGS = "GET_SEARCHED_DOGS";
 export const FILTER_BY_TEMPERAMENT = "FILTER_BY_TEMPERAMENT";
 export const ASCENDENT = "ASCENDENT";
 export const DESCENDENT = "DESCENDENT";
+export const GET_CREATED = "GET_CREATED";
+export const GET_ONLY_API = "GET_ONLY_API";
 
 export const getAllDogs = (dispatch) => {
   return fetch(`http://localhost:3001/dogs`)
@@ -57,5 +59,18 @@ export const descOrder = (value) => {
   return {
     type: DESCENDENT,
     payload: value,
+  };
+};
+
+export const getCreated = () => {
+  return {
+    type: GET_CREATED,
+    payload: "",
+  };
+};
+export const getOnlyApi = () => {
+  return {
+    type: GET_ONLY_API,
+    payload: "",
   };
 };

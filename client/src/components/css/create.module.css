@@ -1,0 +1,18 @@
+section {
+  height: 100vh;
+  background: rgb(190, 150, 150);
+  width: 80%;
+}
+.form {
+  background-color: rgb(245, 229, 229);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  width: 500px;
+  margin: 0 auto;
+  padding: 8%;
+}
+input {
+  padding: 2%;
+  border-radius: 5px;
+}

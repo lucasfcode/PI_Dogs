@@ -5,6 +5,8 @@ import {
   FILTER_BY_TEMPERAMENT,
   ASCENDENT,
   DESCENDENT,
+  GET_CREATED,
+  GET_ONLY_API,
 } from "../actions";
 import {} from "../actions";
 
@@ -22,7 +24,26 @@ export default function rootReducer(state = initialState, action) {
         dogs: action.payload,
         filtered: action.payload,
       };
+    case GET_CREATED:
+      let created = state.dogs.filter((dog) => dog.database);
+      console.log("from reducer created", created);
+      created.length < 1
+        ? (created = ["No hay perros creados"])
+        : console.log("parece que enconcramos perros creados");
+      return {
+        ...state,
+        filtered: created.length ? created : state.dogs,
+      };
+    case GET_ONLY_API:
+      let fromApi = state.dogs.filter((dog) => !dog.database);
+      console.log("se ejecuto reducer GET_API");
+
+      return {
+        ...state,
+        filtered: fromApi,
+      };
     case GET_TEMPERAMENT:
+      console.log("GetTemperaments ejecutado");
       return {
         ...state,
         temperaments: action.payload,

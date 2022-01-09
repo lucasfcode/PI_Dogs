@@ -8,7 +8,6 @@ export default function SearchBar() {
   const [searching, setSearching] = React.useState({
     state: "",
   });
-  const stateRedux = useSelector((state) => state);
 
   const dispatch = useDispatch();
   const onHandler = (e) => {

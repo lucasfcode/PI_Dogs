@@ -7,25 +7,29 @@ const { conn, Breed, Temperament, BreedTemp } = require("../db.js");
 
 /* GET home page. */
 router.get("/", (req, res) => {
+  //en principio busco por name en la api y en db y devuelvo todo
   const { name } = req.query;
   if (name) {
-    axios(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`)
-      .then((d) => {
-        let mapped = d.data.map((r) => r.name);
-        let filtred = mapped.filter((n) =>
-          n.toUpperCase().includes(name.toUpperCase())
+    Promise.all([
+      axios(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`),
+      Breed.findAll({
+        include: {
+          model: Temperament,
+        },
+      }),
+    ])
+      .then((data) => {
+        let findedApi = data[0].data.filter((dog) =>
+          dog.name.toUpperCase().includes(name.toUpperCase())
+        );
+        // console.log("desde back findedApi", findedApi);
+        let findedDB = data[1].filter((d) =>
+          d.name.toUpperCase().includes(name.toUpperCase())
         );
 
-        return filtred.length
-          ? res.status(200).json(filtred)
-          : res
-              .status(200)
-              .send(
-                "La petición se ha completado con éxito pero no se ha encontrado ningún contenido"
-              );
-        //resolver problema con 204 'no content'
+        res.status(200).json([...findedDB, ...findedApi]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error en searching back", err));
   }
   //en caso de que no busquen por query, devolverá todas las razas
   else {
@@ -38,10 +42,10 @@ router.get("/", (req, res) => {
       }),
     ])
       .then((r) => {
-        let apiDogs = r[0].data.map((d) => d.name);
-        let dbDogs = r[1].map((d) => d.name);
+        let apiDogs = r[0].data;
+        let dbDogs = r[1];
         // let allDogs = dbDogs.concat(apiDogs);
-        res.json([...dbDogs, ...apiDogs]);
+        res.status(200).json([...dbDogs, ...apiDogs]);
       })
       .catch((err) => {
         console.log(err);
@@ -77,20 +81,22 @@ router.get("/:idRaza", async (req, res) => {
 //POSTT
 router.post("/", async (req, res) => {
   try {
-    const { name, height, weight, yearsOfLife, image, temperaments } = req.body;
+    const { name, height, weight, yearsOfLife, image, temperament } = req.body;
+    console.log("Objeto recibico en el back", req.body);
     let newDog = await Breed.findOrCreate({
       where: {
+        image,
         name,
         height,
         weight,
         yearsOfLife,
-        image,
       },
     });
     //trae temperamentos que coincidan con los que he recibido
     let tempDB = await Temperament.findAll({
-      where: { name: temperaments },
+      where: { name: temperament },
     });
+
     await newDog[0].setTemperaments(tempDB);
 
     res.status(202).json(newDog);

@@ -18,18 +18,20 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       height: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
         allowNull: false,
       },
       weight: {
-        type: DataTypes.STRING,
-        set(value) {
-          this.setDataValue("weight", value + " cm");
-        },
+        type: DataTypes.JSON,
       },
       yearsOfLife: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
       database: {
         type: DataTypes.BOOLEAN,

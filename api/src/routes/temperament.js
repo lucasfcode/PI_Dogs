@@ -16,11 +16,12 @@ router.get("/", async (req, res) => {
     let allTempers = await mapped.join(",").split(",");
 
     allTempers.forEach((element) => {
-      Temperament.findOrCreate({
-        where: {
-          name: element.trim(),
-        },
-      });
+      element !== "" &&
+        Temperament.findOrCreate({
+          where: {
+            name: element.trim(),
+          },
+        });
     });
     let TemperamentsDB = await Temperament.findAll();
     res.status(200).json(TemperamentsDB);

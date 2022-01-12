@@ -30,10 +30,6 @@ export default function SearchBar() {
       <button className={s.input_1} onClick={(e) => handlerSubmit(e)}>
         Buscar
       </button>
-
-      {/* paginado----------- */}
-
-      {/* ----------------searching div-------------- */}
     </div>
   );
 }

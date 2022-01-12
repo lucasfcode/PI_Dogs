@@ -29,7 +29,7 @@ export default function Home() {
         <div className={sSearch.show}>
           {currentRender.length ? (
             currentRender.map((e) => {
-              return <Dog aDog={e} key={e.id} />;
+              return <Dog aDog={e} key={e.id} id={e.id} />;
             })
           ) : (
             <NotFound />

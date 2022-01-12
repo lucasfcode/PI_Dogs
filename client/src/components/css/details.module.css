@@ -1,0 +1,15 @@
+.details_box {
+  background-color: rgba(240, 224, 224, 0.76);
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap column;
+  width: 60%;
+  min-height: 80vh;
+}
+
+.details_box img {
+  display: flex;
+  width: 600px;
+  border-radius: 55px;
+  margin: 0 auto;
+}

@@ -101,6 +101,14 @@ export default function CreateDog() {
       else check.yearsOfLife = undefined;
     }
 
+    //Validar description
+    if (form.hasOwnProperty("description")) {
+      if (form.description.length < 1)
+        check.description =
+          "Escribe una descripción de tu perro antes de enviar!";
+      else check.description = undefined;
+    }
+
     // //Validar temperamentos
 
     if (selectedTemps.length < 2) {
@@ -354,6 +362,7 @@ export default function CreateDog() {
           name="description"
           value={formState.description}
         />
+        {errors.description && <span>{errors.description}</span>}
         <br />
         <input type="submit" />
         <input type="reset" />

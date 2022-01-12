@@ -6,6 +6,7 @@ import CreateDog from "./components/CreateDog";
 import { getAllDogs, getTemperaments } from "./redux/actions";
 import React from "react";
 import { useDispatch } from "react-redux";
+import Details from "./components/Details";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Entry />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/create/" element={<CreateDog />} />
+          <Route path="home/details/:dogId" element={<Details />} />
         </Routes>
       </BrowserRouter>
     </div>

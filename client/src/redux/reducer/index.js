@@ -7,6 +7,7 @@ import {
   DESCENDENT,
   GET_CREATED,
   GET_ONLY_API,
+  CREATE_DOG,
 } from "../actions";
 import {} from "../actions";
 
@@ -26,13 +27,10 @@ export default function rootReducer(state = initialState, action) {
       };
     case GET_CREATED:
       let created = state.dogs.filter((dog) => dog.database);
-      console.log("from reducer created", created);
-      created.length < 1
-        ? (created = ["No hay perros creados"])
-        : console.log("parece que enconcramos perros creados");
+
       return {
         ...state,
-        filtered: created.length ? created : state.dogs,
+        filtered: created,
       };
     case GET_ONLY_API:
       let fromApi = state.dogs.filter((dog) => !dog.database);
@@ -51,7 +49,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_SEARCHED_DOGS:
       return {
         ...state,
-        searched: action.payload,
+        filtered: action.payload,
       };
     case FILTER_BY_TEMPERAMENT:
       const filter = state.dogs.filter((dog) => {
@@ -67,15 +65,15 @@ export default function rootReducer(state = initialState, action) {
           let mapsOfTrue = action.payload.every((temperament) =>
             tempToArr.includes(temperament)
           );
-          mapsOfTrue &&
-            console.log(
-              mapsOfTrue,
-              dog.name,
-              "posee: ",
-              tempToArr,
-              "y los filtros son: ",
-              action.payload
-            );
+          // mapsOfTrue &&
+          //   console.log(
+          //     mapsOfTrue,
+          //     dog.name,
+          //     "posee: ",
+          //     tempToArr,
+          //     "y los filtros son: ",
+          //     action.payload
+          //   );
           return mapsOfTrue;
         } else {
           console.log(dog.name, "no tiene temperamentos", dog.temperament);
@@ -97,24 +95,84 @@ export default function rootReducer(state = initialState, action) {
       });
       return {
         ...state,
-        filtered: filter,
+        filtered: filter
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .map((e) => e),
       };
+    // case ORDER_BY_NAME:
+    //   let orderName = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
+    //   return {
+    //     ...state,
+    //     filtered: orderName,
+    //   };
+    // case ORDER_BY_WEIGHT:
+    //   let orderWeight = state.dogs.sort(
+    //     (a, b) =>
+    //       Number(a.weight.metric.split("-")[0]) -
+    //       Number(b.weight.metric.split("-")[0])
+    //   );
+    //   return {
+    //     ...state,
+    //     filtered: orderWeight,
+    //   };
     case ASCENDENT:
-      let ordened = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
-      console.log("ordened", ordened);
-      return {
-        ...state,
-        filtered: ordened,
-      };
+      //doble sort porque primero se ordena en funcion al valor minimo [12] y luego al minimo y maximo [..- 34]. Si no devuelvo un map, no recibo el arreglo ordenado
+      console.log("ascendente state.filtered", state.filtered[0].name);
+      let orderWeight = state.filtered
+        .sort((a, b) => {
+          let pesoA = a.weight.metric;
+          let pesoB = b.weight.metric;
+          return Number(pesoA.split("-")[0]) - Number(pesoB.split("-")[0]);
+        })
+        .sort(
+          (a, b) =>
+            Number(a.weight.metric.split("-")[1]) -
+            Number(b.weight.metric.split("-")[1])
+        )
+        .map((e) => e);
+
+      let orderName = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+      if (action.payload === "peso") {
+        return {
+          ...state,
+          filtered: orderWeight,
+        };
+      } else
+        return {
+          ...state,
+          filtered: orderName,
+        };
+
     case DESCENDENT:
-      let descendent = state.filtered.sort((a, b) =>
-        a.name < b.name ? 1 : -1
-      );
-      console.log("descendent", descendent);
+      if (action.payload === "peso") {
+        let orderWeight = state.filtered
+          .sort(
+            (a, b) =>
+              Number(a.weight.metric.split("-")[0]) -
+              Number(b.weight.metric.split("-")[0])
+          )
+          .sort(
+            (a, b) =>
+              Number(a.weight.metric.split("-")[1]) -
+              Number(b.weight.metric.split("-")[1])
+          )
+          .map((e) => e);
+        return {
+          ...state,
+          filtered: orderWeight.reverse(),
+        };
+      } else {
+        return {
+          ...state,
+          filtered: state.filtered.reverse(),
+        };
+      }
+    case CREATE_DOG:
       return {
         ...state,
-        filtered: descendent,
       };
+
     default:
       return { ...state };
   }

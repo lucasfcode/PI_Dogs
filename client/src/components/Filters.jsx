@@ -22,17 +22,21 @@ export function Filters({ setCurrentPage }) {
   );
   const [selected, setSelected] = React.useState([]);
   const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderby] = React.useState("abc");
   const [all, setAll] = React.useState("");
 
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
   const createdHandler = (value) => {
-    console.log("from createdH", value);
+    console.log("from created", value);
     setAll(value);
-    value === "created"
-      ? dispatcher(getCreated())
-      : value === "api"
-      ? dispatcher(getOnlyApi())
-      : getAllDogs(dispatcher);
+    if (value === "created") {
+      dispatcher(getCreated());
+    } else if (value === "api") {
+      dispatcher(getOnlyApi());
+    } else {
+      //traigo a todos los perros
+      getAllDogs(dispatcher);
+    }
   };
   //maneja checkboxs
   const checkHandler = (event) => {
@@ -50,6 +54,8 @@ export function Filters({ setCurrentPage }) {
   //aplicar filtros
   const applyHandler = () => {
     console.log("Aplicando Cambios");
+
+    if (selected.length) dispatcher(filterByTemp);
     selected.length
       ? dispatcher(filterByTemp(selected))
       : getAllDogs(dispatcher);
@@ -59,23 +65,48 @@ export function Filters({ setCurrentPage }) {
   const orderHandler = (value) => {
     setOrder(value);
     value === "asc"
-      ? dispatcher(ascOrder())
+      ? dispatcher(ascOrder(orderBy))
       : value === "desc"
-      ? dispatcher(descOrder())
-      : console.log("error en orderHandler");
+      ? dispatcher(descOrder(orderBy))
+      : console.error("error en orderHandler");
   };
+  const orderByHandler = (e) => {
+    setOrderby(e.target.value);
+    //debo usar dispatch para aplicar cambios
+    dispatcher(
+      order === "asc" ? ascOrder(e.target.value) : descOrder(e.target.value)
+    );
+  };
+  console.log("orden por", orderBy);
   //resetear filtros
   const resetHandler = () => {
     console.log("Filtros reseteados");
     setCheckedState(new Array(124).fill(false));
     setAll("all");
     setOrder("asc");
+    setOrderby("abc");
     dispatcher(ascOrder());
     getAllDogs(dispatcher);
   };
 
   return (
     <div className={s.filter_box}>
+      {/* all api created */}
+      <select
+        onChange={(e) => createdHandler(e.target.value)}
+        className={s.select}
+        value={all}
+      >
+        <option value="all">Todos</option>
+        <option value="api">Api</option>
+        <option value="created">Creados</option>
+      </select>
+      {/* Peso o Alfabeto */}
+      <select value={orderBy} name="" id="" onChange={(e) => orderByHandler(e)}>
+        <option value="abc">Alfabeticamente</option>
+        <option value="peso">Por peso</option>
+      </select>
+      {/* Ascendente o Descendente */}
       <select
         onChange={(e) => orderHandler(e.target.value)}
         className={s.select}
@@ -89,16 +120,7 @@ export function Filters({ setCurrentPage }) {
         </option>
       </select>
 
-      <select
-        onChange={(e) => createdHandler(e.target.value)}
-        className={s.select}
-        value={all}
-      >
-        <option value="all">Todos</option>
-        <option value="api">Api</option>
-        <option value="created">Creados</option>
-      </select>
-
+      {/* temperament-------------- */}
       <div className={s.temperaments}>
         <h3>Filtrar por Temperamento</h3>
         <br />
@@ -124,7 +146,7 @@ export function Filters({ setCurrentPage }) {
         )}
       </div>
       <div>
-        <button onClick={applyHandler}>Aplicar</button>
+        <button onClick={applyHandler}>Aplicar temperamentos</button>
         <button onClick={resetHandler}>Resetear</button>
       </div>
       <NavLink to="/home/create">Crear Perro</NavLink>

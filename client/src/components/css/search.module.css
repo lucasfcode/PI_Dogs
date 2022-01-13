@@ -11,10 +11,13 @@
 }
 .input_1 {
   padding: 1%;
+  background-color: rgba(24, 22, 44, 0.822);
+  color: white;
+  font-weight: bold;
 }
-.searching {
-  background-color: white;
-
-  margin: 0 auto;
-  width: 200px;
+.btn {
+  padding: 1%;
+}
+.btn:hover {
+  cursor: pointer;
 }

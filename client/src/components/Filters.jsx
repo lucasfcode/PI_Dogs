@@ -77,7 +77,7 @@ export function Filters({ setCurrentPage }) {
       order === "asc" ? ascOrder(e.target.value) : descOrder(e.target.value)
     );
   };
-  console.log("orden por", orderBy);
+
   //resetear filtros
   const resetHandler = () => {
     console.log("Filtros reseteados");

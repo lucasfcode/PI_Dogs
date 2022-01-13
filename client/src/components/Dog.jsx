@@ -9,7 +9,14 @@ export default function Dog(props) {
 
   return (
     <div className={s.dog}>
-      <img src={props.aDog.image.url || props.aDog.image} alt="Img_dog" />
+      <div>
+        <img
+          src={props.aDog.image.url || props.aDog.image}
+          alt="Img_dog"
+          className={s.img_card}
+        />
+      </div>
+
       <Link to={`/home/details/${props.aDog.id}`}>
         <h2>{props.aDog.name}</h2>
       </Link>

@@ -1,9 +1,18 @@
 .home {
-  background-color: rgb(255, 255, 255);
-  width: 90%;
+  background-color: rgb(255, 242, 242);
+  min-height: 100vh;
   padding: 5px;
   display: flex;
   flex-flow: row wrap;
+  width: 95%;
+}
+.show {
+  display: flex;
+  padding: 5px;
+  flex-flow: wrap row;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 80%;
 }
 .active {
   border-radius: 3px;
@@ -21,7 +30,8 @@
   background-color: rgb(225, 238, 210);
   list-style: none;
   justify-content: space-around;
-  height: 40px;
+  height: 80px;
+  margin-bottom: 10px;
   align-items: center;
 }
 .pages ul li a {

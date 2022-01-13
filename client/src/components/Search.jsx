@@ -27,7 +27,7 @@ export default function SearchBar() {
         onChange={(e) => onHandler(e)}
         autoFocus
       />
-      <button className={s.input_1} onClick={(e) => handlerSubmit(e)}>
+      <button className={s.btn} onClick={(e) => handlerSubmit(e)}>
         Buscar
       </button>
     </div>

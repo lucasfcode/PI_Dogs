@@ -1,5 +1,5 @@
 .filter_box {
-  background-color: rgba(87, 150, 233, 0.418);
+  background-color: rgba(118, 114, 182, 0.418);
   width: 18%;
 }
 .select {
@@ -12,7 +12,7 @@
 }
 
 .temperaments {
-  background-color: rgba(61, 59, 179, 0.493);
+  background-color: rgba(201, 200, 226, 0.493);
   display: flex;
   flex-flow: row wrap;
   width: 100%;

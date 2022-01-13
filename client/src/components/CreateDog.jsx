@@ -224,8 +224,8 @@ export default function CreateDog() {
       <NavLink to="/home">
         <h1>Home</h1>
       </NavLink>
+      <h1>Crea tu propia raza</h1>
       <form onSubmit={(e) => onSubmit(e)} className={s.form}>
-        <h1>Crea tu propia raza</h1>
         <label value="Raza">
           <span>Raza </span>
           *

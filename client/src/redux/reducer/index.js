@@ -117,7 +117,7 @@ export default function rootReducer(state = initialState, action) {
     //   };
     case ASCENDENT:
       //doble sort porque primero se ordena en funcion al valor minimo [12] y luego al minimo y maximo [..- 34]. Si no devuelvo un map, no recibo el arreglo ordenado
-      console.log("ascendente state.filtered", state.filtered[0].name);
+
       let orderWeight = state.filtered
         .sort((a, b) => {
           let pesoA = a.weight.metric;

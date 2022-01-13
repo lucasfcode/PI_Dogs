@@ -1,7 +1,7 @@
 import Search from "./Search";
 import React from "react";
 import sHome from "./css/home.module.css";
-
+import dogStyle from "./css/dog.module.css";
 import Pages from "./Pages";
 import { useSelector } from "react-redux";
 import Dog from "./Dog";
@@ -26,7 +26,7 @@ export default function Home() {
       <Filters />
 
       {
-        <div className={sHome.show}>
+        <div className={dogStyle.dogs_container}>
           {currentRender.length ? (
             currentRender.map((e) => {
               return <Dog aDog={e} key={e.id} id={e.id} />;

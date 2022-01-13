@@ -5,6 +5,7 @@
 body {
   background-image: url("./images/dog-background.jpg");
   background-position: initial fixed;
+  background-attachment: fixed;
   background-size: cover;
   scroll-behavior: smooth;
 }

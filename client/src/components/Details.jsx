@@ -7,7 +7,7 @@ export default function Details() {
   const dogs = useSelector((state) => state.dogs);
   let { dogId } = useParams();
 
-  let thisDog = dogs.find((d) => d.id == dogId);
+  let thisDog = dogs.find((d) => d.id.toString() === dogId.toString());
   console.log("thisDog", thisDog);
 
   return (

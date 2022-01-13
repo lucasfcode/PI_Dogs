@@ -1,19 +1,12 @@
 .home {
-  background-color: rgb(255, 242, 242);
+  background: #e0e0e0;
   min-height: 100vh;
-  padding: 5px;
+  padding: 10px;
   display: flex;
   flex-flow: row wrap;
-  width: 95%;
+  width: 90%;
 }
-.show {
-  display: flex;
-  padding: 5px;
-  flex-flow: wrap row;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 80%;
-}
+
 .active {
   border-radius: 3px;
   background: #161111bb;

@@ -1,10 +1,14 @@
 section {
   height: 100vh;
-  background: rgb(190, 150, 150);
+  background: rgb(233, 207, 207);
   width: 80%;
 }
+h1 {
+  width: 100%;
+  background-color: rgb(236, 211, 211);
+}
 .form {
-  background-color: rgb(245, 229, 229);
+  background-color: rgb(56, 130, 199);
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -15,4 +19,7 @@ section {
 input {
   padding: 2%;
   border-radius: 5px;
+}
+errors {
+  color: red;
 }

@@ -1,7 +1,8 @@
 section {
-  height: 100vh;
-  background: rgb(233, 207, 207);
-  width: 80%;
+  min-height: 100vh;
+  background: rgba(37, 23, 23, 0.178);
+  width: 60%;
+  padding: 5%;
 }
 h1 {
   width: 100%;
@@ -9,17 +10,121 @@ h1 {
 }
 .form {
   background-color: rgb(56, 130, 199);
+  border-radius: 58px;
+  padding: 1%;
   display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  width: 500px;
-  margin: 0 auto;
-  padding: 8%;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
 }
-input {
-  padding: 2%;
-  border-radius: 5px;
+.containers {
+  width: 100%;
+  background-color: rgb(207, 230, 185);
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
-errors {
+.raza_label {
+  width: 100%;
+}
+.raza_label input,
+.image_label input {
+  width: 60%;
+  padding: 15px;
+  border: none;
+}
+.image_label {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.image_label input {
+  width: 40%;
+  height: 16px;
+  margin-left: 10px;
+}
+.img_box {
+  object-fit: cover;
+  width: 20%;
+  display: block;
+  border-radius: 50px;
+  margin-left: 20px;
+}
+.img_box img {
+  width: 100%;
+  border-radius: 20%;
+}
+
+.error {
   color: red;
+  width: 100%;
+}
+.height_label,
+.weight_label,
+.live_label {
+  background-color: rgba(0, 0, 0, 0.295);
+  width: 100%;
+  display: flex;
+  flex-flow: wrap row;
+}
+h4 {
+  width: 100%;
+}
+.min_max {
+  padding: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(201, 162, 162);
+}
+.min_max input {
+  padding: 15px;
+  width: 10%;
+}
+.temperament_box {
+  background-color: rgb(59, 37, 37);
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+.temperament_box select {
+  padding: 15px;
+  width: 60%;
+}
+/* Caja de temps seleccionados
+ */
+.temperament_box div {
+  width: 50%;
+  background-color: white;
+  padding: 5%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.temperament_box div span {
+  align-items: center;
+  background-color: rgb(37, 25, 25);
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+
+  padding: 4px 0px;
+  width: 30%;
+  justify-content: space-around;
+  margin: 4px 0px;
+}
+.temperament_box div span button {
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif,
+    Geneva, Tahoma, sans-serif;
 }

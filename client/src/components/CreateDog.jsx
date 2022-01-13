@@ -226,146 +226,192 @@ export default function CreateDog() {
       </NavLink>
       <h1>Crea tu propia raza</h1>
       <form onSubmit={(e) => onSubmit(e)} className={s.form}>
-        <label value="Raza">
-          <span>Raza </span>
-          *
-          <input
-            required
-            onChange={(e) => onName(e)}
-            onBlur={(e) => blurHandler(e)}
-            type="text"
-            name="name"
-            autoFocus
-            value={formState.name}
-          />
-        </label>
-        {errors.name && <span>{errors.name}</span>}
-        {/* ---------------Height------------ */}
-        <label htmlFor="height">
-          <span>Altura</span>
-          Min
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onHeight(e)}
-            id="min_height"
-            type="number"
-            name="height"
-            value={formState.height.min}
-          />
-          Max
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onHeight(e)}
-            type="number"
-            id="max_height"
-            name="height"
-            value={formState.height.max}
-          />
-        </label>
-        {errors.height && <span>{errors.height}</span>}
-        {/* ---------------weight------------ */}
-        <label htmlFor="weight">
-          <span>
-            Peso <span>* </span>
-          </span>
-          Min
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onWeight(e)}
-            type="number"
-            id="min_weight"
-            name="weight"
-            value={formState.weight.min}
-          />
-          Max
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onWeight(e)}
-            type="number"
-            id="max_weight"
-            name="weight"
-            value={formState.weight.max}
-          />
-        </label>
-        {errors.weight && <span>{errors.weight}</span>}
-        {/* ---------------image--------- */}
-        <label htmlFor="image">
-          <span>Imagen </span>
-          <input
-            onChange={(e) => onImage(e)}
-            onBlur={(e) => blurHandler(e)}
-            type="text"
-            name="image"
-            placeholder="Url de la imagen.."
-            value={formState.image}
-          />
-          <img src={formState.image} alt="Su perro img" width="300" />
-        </label>
-        {errors.image && <span>{errors.image}</span>}
-        {/* ---------------Live-------------- */}
-        <label htmlFor="live">
-          <span>Años de vida</span>
-          Min
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onLive(e)}
-            type="number"
-            id="min_age"
-            name="yearsOfLife"
-            value={formState.yearsOfLife.min}
-          />
-          Max{" "}
-          <input
-            onBlur={(e) => blurHandler(e)}
-            onChange={(e) => onLive(e)}
-            type="number"
-            id="max_age"
-            name="yearsOfLife"
-            value={formState.yearsOfLife.max}
-          />
-        </label>
-        {errors.yearsOfLife && <span>{errors.yearsOfLife}</span>}
-        {/*  ---------------temeperament---------*/}
-        <label>Temperamento</label>
-        <select
-          onChange={(e) => onTemperament(e)}
-          onBlur={(e) => blurHandler(e)}
-        >
-          {temperament.length ? (
-            temperament.map((temp, idx) => (
-              <option key={temp} value={temp}>
-                {temp}
-              </option>
-            ))
-          ) : (
-            <option>Cargando...</option>
-          )}
-        </select>
-        {errors.temperaments && <span>{errors.temperaments}</span>}
-        <div>
-          {selectedTemps.map((temp) => (
-            <span key={temp}>
-              {temp}
-              <button name={temp} onClick={(e) => deleteTemp(e)}>
-                X
-              </button>
-            </span>
-          ))}
+        {/* {" ---------------Name--------------"} */}
+        <div className={s.containers}>
+          <label value="Raza" className={s.raza_label}>
+            <h4>Raza </h4>
+            *
+            <input
+              required
+              onChange={(e) => onName(e)}
+              onBlur={(e) => blurHandler(e)}
+              type="text"
+              name="name"
+              autoFocus
+              value={formState.name}
+            />
+          </label>
+          {errors.name && <span className={s.error}>{errors.name}</span>}
         </div>
+
+        {/* ---------------image--------- */}
+        <div className={s.containers}>
+          <label htmlFor="image" className={s.image_label}>
+            <h4>Imagen </h4>
+            <input
+              onChange={(e) => onImage(e)}
+              onBlur={(e) => blurHandler(e)}
+              type="text"
+              name="image"
+              placeholder="Url de la imagen.."
+              value={formState.image}
+            />
+            <div className={s.img_box}>
+              <img
+                src={formState.image}
+                alt="Su perro img"
+                width="300"
+                className={s.image_label_img}
+              />
+            </div>
+          </label>
+          {errors.image && <span className={s.error}>{errors.image}</span>}
+        </div>
+
+        {/* ---------------Height------------ */}
+        <div className={s.containers}>
+          <label htmlFor="height" className={s.height_label}>
+            <h4>Altura</h4>
+            <div className={s.min_max}>
+              <input
+                placeholder="Mínima"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onHeight(e)}
+                id="min_height"
+                type="number"
+                name="height"
+                value={formState.height.min}
+              />
+              <input
+                placeholder="Máxima..."
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onHeight(e)}
+                type="number"
+                id="max_height"
+                name="height"
+                value={formState.height.max}
+              />
+            </div>
+          </label>
+          {errors.height && <span className={s.error}>{errors.height}</span>}
+        </div>
+
+        {/* ---------------weight------------ */}
+        <div className={s.containers}>
+          <label htmlFor="weight" className={s.weight_label}>
+            <h4>Peso</h4>
+
+            <div className={s.min_max}>
+              <input
+                placeholder="Mínimo"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onWeight(e)}
+                type="number"
+                id="min_weight"
+                name="weight"
+                value={formState.weight.min}
+              />
+
+              <input
+                placeholder="Máximo"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onWeight(e)}
+                type="number"
+                id="max_weight"
+                name="weight"
+                value={formState.weight.max}
+              />
+            </div>
+          </label>
+          {errors.weight && <span className={s.error}>{errors.weight}</span>}
+        </div>
+
+        {/* ---------------Live-------------- */}
+        <div className={s.containers}>
+          <label htmlFor="live" className={s.live_label}>
+            <h4>Promedio de vida</h4>
+            <div className={s.min_max}>
+              <input
+                placeholder="Mínimo"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onLive(e)}
+                type="number"
+                id="min_age"
+                name="yearsOfLife"
+                value={formState.yearsOfLife.min}
+              />
+
+              <input
+                placeholder="Máximo"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onLive(e)}
+                type="number"
+                id="max_age"
+                name="yearsOfLife"
+                value={formState.yearsOfLife.max}
+              />
+            </div>
+          </label>
+          {errors.yearsOfLife && (
+            <span className={s.error}>{errors.yearsOfLife}</span>
+          )}
+        </div>
+
+        {/*  ---------------temeperament---------*/}
+        <div className={s.temperament_box}>
+          <h4>Temperamento</h4>
+          <select
+            onChange={(e) => onTemperament(e)}
+            onBlur={(e) => blurHandler(e)}
+          >
+            {temperament.length ? (
+              temperament.map((temp, idx) => (
+                <option key={temp} value={temp}>
+                  {temp}
+                </option>
+              ))
+            ) : (
+              <option>Cargando...</option>
+            )}
+          </select>
+          {errors.temperaments && (
+            <span className={s.error}>{errors.temperaments}</span>
+          )}
+          <div>
+            {selectedTemps.map((temp) => (
+              <span key={temp}>
+                {temp}
+                <button name={temp} onClick={(e) => deleteTemp(e)}>
+                  X
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* ---------------description--------- */}
-        <label htmlFor="description">Descripcion</label>
-        <textarea
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => onDescription(e)}
-          cols="20"
-          rows="10"
-          name="description"
-          value={formState.description}
-        />
-        {errors.description && <span>{errors.description}</span>}
-        <br />
-        <input type="submit" />
-        <input type="reset" />
+        <div className={s.containers}>
+          <label htmlFor="description" className={s.description_label}>
+            Descripcion
+            <textarea
+              onBlur={(e) => blurHandler(e)}
+              onChange={(e) => onDescription(e)}
+              cols="20"
+              rows="10"
+              name="description"
+              value={formState.description}
+            />
+          </label>
+          {errors.description && (
+            <span className={s.error}>{errors.description}</span>
+          )}
+        </div>
+
+        {/* -----------submit---------- */}
+        <div className={s.submit_box}>
+          <input type="submit" />
+          <input type="reset" />
+        </div>
       </form>
       ;
     </section>

@@ -1,25 +1,85 @@
 section {
   min-height: 100vh;
-  background: rgba(37, 23, 23, 0.178);
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   width: 60%;
   padding: 5%;
+  background: #ecf0f3;
 }
-h1 {
-  width: 100%;
-  background-color: rgb(236, 211, 211);
+.error {
+  color: red;
+  padding: 5px;
+
+  animation-name: error;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name: error;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+@-moz-keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.title {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+  padding: 2%;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding-top: 24px;
 }
 .form {
-  background-color: rgb(56, 130, 199);
+  background-color: #e6efed;
+  border-radius: 40px;
+  box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+  padding: 50px 35px 35px 35px;
   border-radius: 58px;
-  padding: 1%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 100%;
+  padding: 2%;
+  margin: 0 auto;
+  width: 80%;
 }
-.containers {
-  width: 100%;
-  background-color: rgb(207, 230, 185);
+/* div de cada label */
+.containers,
+.temperament_box,
+.submit_box {
+  width: 90%;
+  margin: 0 auto;
 
   display: flex;
   flex-flow: row wrap;
@@ -28,103 +88,133 @@ h1 {
 }
 .raza_label {
   width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
 }
 .raza_label input,
 .image_label input {
-  width: 60%;
   padding: 15px;
   border: none;
+  width: 85%;
 }
 .image_label {
-  width: 100%;
+  width: 88%;
   padding: 15px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .image_label input {
-  width: 40%;
+  width: 60%;
   height: 16px;
-  margin-left: 10px;
 }
 .img_box {
   object-fit: cover;
-  width: 20%;
-  display: block;
-  border-radius: 50px;
-  margin-left: 20px;
+  width: 25%;
 }
 .img_box img {
   width: 100%;
-  border-radius: 20%;
+  border-radius: 15%;
 }
 
-.error {
-  color: red;
-  width: 100%;
-}
 .height_label,
 .weight_label,
 .live_label {
-  background-color: rgba(0, 0, 0, 0.295);
   width: 100%;
   display: flex;
   flex-flow: wrap row;
 }
-h4 {
+section h4 {
   width: 100%;
+  padding: 10px;
 }
 .min_max {
   padding: 5%;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(201, 162, 162);
 }
 .min_max input {
   padding: 15px;
   width: 10%;
 }
 .temperament_box {
-  background-color: rgb(59, 37, 37);
-  padding: 15px;
-  width: 100%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
 }
-.temperament_box select {
-  padding: 15px;
-  width: 60%;
-}
-/* Caja de temps seleccionados
+
+/* Container del div que tiene select y div selected
  */
-.temperament_box div {
-  width: 50%;
-  background-color: white;
-  padding: 5%;
+.select_div_box {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
-.temperament_box div span {
-  align-items: center;
-  background-color: rgb(37, 25, 25);
-  border-radius: 8px;
-  color: #fff;
-  display: flex;
 
+.select_div_box select {
+  width: 100%;
+  margin: 8px 0px;
+}
+/* caja de temperamentos seleccionados */
+.selected_temps_box {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+/* cada temperamento span que posee un btn  */
+.selected_temps_box span {
+  align-items: center;
+  background: #ecf0f3;
+  box-shadow: inset 10px 10px 20px #cbced1, inset -10px -10px 20px #ffffff;
+  border-radius: 8px;
+  color: #333;
+  display: flex;
   padding: 4px 0px;
   width: 30%;
   justify-content: space-around;
   margin: 4px 0px;
 }
-.temperament_box div span button {
+.selected_temps_box span button {
   padding: 4px;
+  background-color: rgba(255, 255, 255, 0.068);
   border: none;
+  font-weight: bold;
   cursor: pointer;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif,
     Geneva, Tahoma, sans-serif;
+}
+/* DESCRIPTION */
+.description_label {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  height: 100px;
+}
+section input,
+section select,
+textarea {
+  width: 100%;
+  border-radius: 10px;
+  background: #ecf0f3;
+  box-shadow: inset 10px 10px 20px #cbced1, inset -10px -10px 20px #ffffff;
+  padding: 3%;
+
+  border: none;
+}
+/* SUBMMIT */
+
+.submit_box input {
+  padding: 4%;
+  cursor: pointer;
 }

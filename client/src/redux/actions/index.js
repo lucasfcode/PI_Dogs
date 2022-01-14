@@ -98,8 +98,8 @@ export const getOnlyApi = () => {
 export const createDog = (object) => {
   let setBody = {
     ...object,
-    height: { metric: `${object.height.min} - ${object.height.max}` },
-    weight: { metric: `${object.weight.min} - ${object.weight.max}` },
+    height: `${object.height.min} - ${object.height.max}`,
+    weight: `${object.weight.min} - ${object.weight.max}`,
     yearsOfLife: `${object.yearsOfLife.min} - ${object.yearsOfLife.max}`,
   };
   // console.log("setBody", setBody);

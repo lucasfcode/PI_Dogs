@@ -8,7 +8,14 @@ export default function Details() {
   let { dogId } = useParams();
 
   let thisDog = dogs.find((d) => d.id.toString() === dogId.toString());
-  console.log("thisDog", thisDog);
+  let temperament =
+    thisDog &&
+    (thisDog.database
+      ? thisDog.temperaments.map((e) => e.name).join(", ")
+      : thisDog.temperament);
+
+  console.log("temperament", temperament);
+  console.log("d", thisDog);
 
   return (
     <div className={s.details_box}>
@@ -23,7 +30,7 @@ export default function Details() {
       <div>
         <p>{thisDog && thisDog.description}</p>
         <h2>Características</h2>
-        <p>Temperamento: {thisDog && thisDog.temperament}</p>
+        <p>{temperament}</p>
         <p>Altura : {thisDog && thisDog.height.metric}</p>
         <p>Peso : {thisDog && thisDog.weight.metric}</p>
         <p>

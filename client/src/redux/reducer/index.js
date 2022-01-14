@@ -16,10 +16,12 @@ const initialState = {
   temperaments: [],
   searched: [],
   filtered: [],
+  filteredByTemps: [],
 };
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_DOGS:
+      console.log("se ejecuto getAlldogs");
       return {
         ...state,
         dogs: action.payload,
@@ -41,7 +43,6 @@ export default function rootReducer(state = initialState, action) {
         filtered: fromApi,
       };
     case GET_TEMPERAMENT:
-      console.log("GetTemperaments ejecutado");
       return {
         ...state,
         temperaments: action.payload,
@@ -57,26 +58,19 @@ export default function rootReducer(state = initialState, action) {
         //action.payload--> array
         //cada elemento del payload debe existir en las temps del dog. Es un concicional &&
         //tempr to array
-        let tempToArr =
+        let tempApiToArr =
           dog.temperament &&
           dog.temperament.split(",").map((e) => e.toUpperCase().trim());
         //filter &&
-        if (tempToArr) {
-          let mapsOfTrue = action.payload.every((temperament) =>
-            tempToArr.includes(temperament)
+        if (tempApiToArr) {
+          //si Todos los el pasan el boolean, devuelve true
+          let mapsOfTrue = action.payload.every((tempUser) =>
+            tempApiToArr.includes(tempUser)
           );
-          // mapsOfTrue &&
-          //   console.log(
-          //     mapsOfTrue,
-          //     dog.name,
-          //     "posee: ",
-          //     tempToArr,
-          //     "y los filtros son: ",
-          //     action.payload
-          //   );
+
           return mapsOfTrue;
         } else {
-          console.log(dog.name, "no tiene temperamentos", dog.temperament);
+          console.log("este perro:", dog.name, "no tiene temperamentos", dog);
           return false;
         }
 
@@ -99,24 +93,9 @@ export default function rootReducer(state = initialState, action) {
           .sort((a, b) => (a.name > b.name ? 1 : -1))
           .map((e) => e),
       };
-    // case ORDER_BY_NAME:
-    //   let orderName = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
-    //   return {
-    //     ...state,
-    //     filtered: orderName,
-    //   };
-    // case ORDER_BY_WEIGHT:
-    //   let orderWeight = state.dogs.sort(
-    //     (a, b) =>
-    //       Number(a.weight.metric.split("-")[0]) -
-    //       Number(b.weight.metric.split("-")[0])
-    //   );
-    //   return {
-    //     ...state,
-    //     filtered: orderWeight,
-    //   };
+
     case ASCENDENT:
-      //doble sort porque primero se ordena en funcion al valor minimo [12] y luego al minimo y maximo [..- 34]. Si no devuelvo un map, no recibo el arreglo ordenado
+      //doble sort porque primero se ordena en funcion al valor minimo  y luego al minimo y maximo del peso. Si no devuelvo un map, no recibo el arreglo ordenado. Trabaja sobre los dogs de filtered
 
       let orderWeight = state.filtered
         .sort((a, b) => {

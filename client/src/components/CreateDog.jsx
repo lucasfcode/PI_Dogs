@@ -1,8 +1,8 @@
 import React from "react";
-import s from "./css/create.module.css";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { createDog } from "../redux/actions";
+import createCss from "./css/create.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { createDog, getAllDogs } from "../redux/actions";
 
 export default function CreateDog() {
   const temperament = useSelector((state) =>
@@ -21,6 +21,11 @@ export default function CreateDog() {
     description: "",
   });
   const [errors, setErrors] = React.useState({});
+  let navigate = useNavigate();
+
+  const goHome = () => {
+    navigate("/home");
+  };
 
   const validatorFn = (form) => {
     let check = {};
@@ -207,6 +212,7 @@ export default function CreateDog() {
     let fails = validatorFn(formState);
     //seteo con los errores previos para que se vayan acumulando
     //itero fails para que concatene sus props
+
     setErrors((prev) => {
       return { ...prev, ...fails };
     });
@@ -215,8 +221,10 @@ export default function CreateDog() {
     let combined = { ...formState, temperament: selectedTemps };
     if (!keys) {
       createDog(combined);
+
       resetAll();
-    } else alert("Corrija los errores de los campos!");
+      goHome();
+    } else return alert("Corrija los errores de los campos!");
   };
 
   return (
@@ -224,11 +232,11 @@ export default function CreateDog() {
       <NavLink to="/home">
         <h1>Home</h1>
       </NavLink>
-      <h1>Crea tu propia raza</h1>
-      <form onSubmit={(e) => onSubmit(e)} className={s.form}>
+      <h1 className={createCss.title}>Crea tu propia raza</h1>
+      <form onSubmit={(e) => onSubmit(e)} className={createCss.form}>
         {/* {" ---------------Name--------------"} */}
-        <div className={s.containers}>
-          <label value="Raza" className={s.raza_label}>
+        <div className={createCss.containers}>
+          <label value="Raza" className={createCss.raza_label}>
             <h4>Raza </h4>
             *
             <input
@@ -241,12 +249,14 @@ export default function CreateDog() {
               value={formState.name}
             />
           </label>
-          {errors.name && <span className={s.error}>{errors.name}</span>}
+          {errors.name && (
+            <span className={createCss.error}>{errors.name}</span>
+          )}
         </div>
 
         {/* ---------------image--------- */}
-        <div className={s.containers}>
-          <label htmlFor="image" className={s.image_label}>
+        <div className={createCss.containers}>
+          <label htmlFor="image" className={createCss.image_label}>
             <h4>Imagen </h4>
             <input
               onChange={(e) => onImage(e)}
@@ -256,23 +266,25 @@ export default function CreateDog() {
               placeholder="Url de la imagen.."
               value={formState.image}
             />
-            <div className={s.img_box}>
+            <div className={createCss.img_box}>
               <img
                 src={formState.image}
                 alt="Su perro img"
                 width="300"
-                className={s.image_label_img}
+                className={createCss.image_label_img}
               />
             </div>
           </label>
-          {errors.image && <span className={s.error}>{errors.image}</span>}
+          {errors.image && (
+            <span className={createCss.error}>{errors.image}</span>
+          )}
         </div>
 
         {/* ---------------Height------------ */}
-        <div className={s.containers}>
-          <label htmlFor="height" className={s.height_label}>
+        <div className={createCss.containers}>
+          <label htmlFor="height" className={createCss.height_label}>
             <h4>Altura</h4>
-            <div className={s.min_max}>
+            <div className={createCss.min_max}>
               <input
                 placeholder="Mínima"
                 onBlur={(e) => blurHandler(e)}
@@ -293,15 +305,17 @@ export default function CreateDog() {
               />
             </div>
           </label>
-          {errors.height && <span className={s.error}>{errors.height}</span>}
+          {errors.height && (
+            <span className={createCss.error}>{errors.height}</span>
+          )}
         </div>
 
         {/* ---------------weight------------ */}
-        <div className={s.containers}>
-          <label htmlFor="weight" className={s.weight_label}>
+        <div className={createCss.containers}>
+          <label htmlFor="weight" className={createCss.weight_label}>
             <h4>Peso</h4>
 
-            <div className={s.min_max}>
+            <div className={createCss.min_max}>
               <input
                 placeholder="Mínimo"
                 onBlur={(e) => blurHandler(e)}
@@ -323,14 +337,16 @@ export default function CreateDog() {
               />
             </div>
           </label>
-          {errors.weight && <span className={s.error}>{errors.weight}</span>}
+          {errors.weight && (
+            <span className={createCss.error}>{errors.weight}</span>
+          )}
         </div>
 
         {/* ---------------Live-------------- */}
-        <div className={s.containers}>
-          <label htmlFor="live" className={s.live_label}>
+        <div className={createCss.containers}>
+          <label htmlFor="live" className={createCss.live_label}>
             <h4>Promedio de vida</h4>
-            <div className={s.min_max}>
+            <div className={createCss.min_max}>
               <input
                 placeholder="Mínimo"
                 onBlur={(e) => blurHandler(e)}
@@ -353,47 +369,50 @@ export default function CreateDog() {
             </div>
           </label>
           {errors.yearsOfLife && (
-            <span className={s.error}>{errors.yearsOfLife}</span>
+            <span className={createCss.error}>{errors.yearsOfLife}</span>
           )}
         </div>
 
         {/*  ---------------temeperament---------*/}
-        <div className={s.temperament_box}>
+        <div className={createCss.temperament_box}>
           <h4>Temperamento</h4>
-          <select
-            onChange={(e) => onTemperament(e)}
-            onBlur={(e) => blurHandler(e)}
-          >
-            {temperament.length ? (
-              temperament.map((temp, idx) => (
-                <option key={temp} value={temp}>
-                  {temp}
-                </option>
-              ))
-            ) : (
-              <option>Cargando...</option>
+          <div className={createCss.select_div_box}>
+            <select
+              onChange={(e) => onTemperament(e)}
+              onBlur={(e) => blurHandler(e)}
+            >
+              {temperament.length ? (
+                temperament.map((temp, idx) => (
+                  <option key={temp} value={temp}>
+                    {temp}
+                  </option>
+                ))
+              ) : (
+                <option>Cargando...</option>
+              )}
+            </select>
+            {errors.temperaments && (
+              <span className={createCss.error}>{errors.temperaments}</span>
             )}
-          </select>
-          {errors.temperaments && (
-            <span className={s.error}>{errors.temperaments}</span>
-          )}
-          <div>
-            {selectedTemps.map((temp) => (
-              <span key={temp}>
-                {temp}
-                <button name={temp} onClick={(e) => deleteTemp(e)}>
-                  X
-                </button>
-              </span>
-            ))}
+            <div className={createCss.selected_temps_box}>
+              {selectedTemps.map((temp) => (
+                <span key={temp}>
+                  {temp}
+                  <button name={temp} onClick={(e) => deleteTemp(e)}>
+                    X
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* ---------------description--------- */}
-        <div className={s.containers}>
-          <label htmlFor="description" className={s.description_label}>
-            Descripcion
+        <div className={createCss.containers}>
+          <h4>Descripcion</h4>
+          <label htmlFor="description" className={createCss.description_label}>
             <textarea
+              placeholder="Escribe algo sobre tu perro!"
               onBlur={(e) => blurHandler(e)}
               onChange={(e) => onDescription(e)}
               cols="20"
@@ -403,17 +422,16 @@ export default function CreateDog() {
             />
           </label>
           {errors.description && (
-            <span className={s.error}>{errors.description}</span>
+            <span className={createCss.error}>{errors.description}</span>
           )}
         </div>
 
         {/* -----------submit---------- */}
-        <div className={s.submit_box}>
+        <div className={createCss.submit_box}>
           <input type="submit" />
-          <input type="reset" />
+          <input type="reset" onClick={() => resetAll()} />
         </div>
       </form>
-      ;
     </section>
   );
 }

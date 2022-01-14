@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,6 +24,7 @@ export function Filters({ setCurrentPage }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderby] = React.useState("abc");
   const [all, setAll] = React.useState("");
+  let navigate = useNavigate();
 
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
   const createdHandler = (value) => {
@@ -53,12 +54,9 @@ export function Filters({ setCurrentPage }) {
   };
   //aplicar filtros
   const applyHandler = () => {
-    console.log("Aplicando Cambios");
+    console.log("Aplicando filtros");
 
-    if (selected.length) dispatcher(filterByTemp);
-    selected.length
-      ? dispatcher(filterByTemp(selected))
-      : getAllDogs(dispatcher);
+    if (selected.length) dispatcher(filterByTemp(selected));
   };
 
   //ordenar

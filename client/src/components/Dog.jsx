@@ -4,7 +4,7 @@ import s from "./css/dog.module.css";
 export default function Dog(props) {
   // declaro temperament porque los dogs creados me devuelven un array
   let temperament = props.aDog.temperaments
-    ? props.aDog.temperaments.map((e) => e.name).join(", ")
+    ? props.aDog.temperaments.map((e) => e.name).join(",")
     : props.aDog.temperament;
 
   return (
@@ -32,7 +32,10 @@ export default function Dog(props) {
         </div>
         <div className={s.weight_box}>
           <h3>Peso</h3>
-          <span>{props.aDog.weight.metric || props.aDog.weight} Kg</span>
+          <span>
+            {props.aDog.database ? props.aDog.weight : props.aDog.weight.metric}{" "}
+            Kg
+          </span>
         </div>
       </div>
     </div>

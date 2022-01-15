@@ -1,0 +1,34 @@
+.main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.616);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: initial;
+}
+.main div {
+  width: 100%;
+  position: relative;
+}
+.main img {
+  width: 68%;
+
+  border-radius: 5%;
+  margin: 0 auto;
+}
+.close {
+  cursor: pointer;
+  position: absolute;
+  font-size: 50px;
+  top: 2%;
+  right: 13%;
+  background-color: rgba(168, 113, 113, 0);
+  color: #fff;
+  border: none;
+}
+.display {
+  display: none;
+}

@@ -4,15 +4,15 @@
   padding: 10px;
   display: flex;
   flex-flow: row wrap;
-  width: 90%;
+  width: 100%;
 }
 
 .active {
   border-radius: 3px;
-  background: #161111bb;
-  box-shadow: 31px 31px 63px #676767, -31px -31px 63px #1a0e0e;
+  /* background: #161111bb; */
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   font-size: 20px;
-  color: #fff;
+  font-weight: bold;
 }
 .pages {
   width: 100%;
@@ -20,22 +20,26 @@
 }
 .pages ul {
   display: flex;
-  background-color: rgb(225, 238, 210);
+  background: #ecf0f3;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   list-style: none;
   justify-content: space-around;
   height: 80px;
   margin-bottom: 10px;
   align-items: center;
+  border-radius: 8px;
 }
 .pages ul li a {
   text-decoration: none;
 }
 .pages ul li {
   padding: 5px;
+  width: 2%;
   cursor: pointer;
 }
 .pages ul li:hover {
-  background: #161111bb;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   font-size: 20px;
+  font-weight: bold;
   border-radius: 3px;
 }

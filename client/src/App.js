@@ -7,6 +7,7 @@ import { getAllDogs, getTemperaments } from "./redux/actions";
 import React from "react";
 import { useDispatch } from "react-redux";
 import Details from "./components/Details";
+import Nav from "./components/Nav";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Nav />
         <Routes>
           <Route path="/" element={<Entry />} />
           <Route path="/home" element={<Home />} />

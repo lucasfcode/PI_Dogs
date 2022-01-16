@@ -89,34 +89,42 @@ export function Filters({ setCurrentPage }) {
 
   return (
     <div className={s.filter_box}>
-      {/* all api created */}
-      <select
-        onChange={(e) => createdHandler(e.target.value)}
-        className={s.select}
-        value={all}
-      >
-        <option value="all">Todos</option>
-        <option value="api">Api</option>
-        <option value="created">Creados</option>
-      </select>
-      {/* Peso o Alfabeto */}
-      <select value={orderBy} name="" id="" onChange={(e) => orderByHandler(e)}>
-        <option value="abc">Alfabeticamente</option>
-        <option value="peso">Por peso</option>
-      </select>
-      {/* Ascendente o Descendente */}
-      <select
-        onChange={(e) => orderHandler(e.target.value)}
-        className={s.select}
-        value={order}
-      >
-        <option key={"asc"} value="asc">
-          Ascendente
-        </option>
-        <option key={"desc"} value="desc">
-          Descendente
-        </option>
-      </select>
+      <div className={s.selects_box}>
+        {/* all api created */}
+        <select
+          onChange={(e) => createdHandler(e.target.value)}
+          className={s.select}
+          value={all}
+        >
+          <option value="all">Todos</option>
+          <option value="api">Api</option>
+          <option value="created">Creados</option>
+        </select>
+        {/* Peso o Alfabeto */}
+        <select
+          className={s.select}
+          value={orderBy}
+          name=""
+          id=""
+          onChange={(e) => orderByHandler(e)}
+        >
+          <option value="abc">Alfabeticamente</option>
+          <option value="peso">Por peso</option>
+        </select>
+        {/* Ascendente o Descendente */}
+        <select
+          onChange={(e) => orderHandler(e.target.value)}
+          className={s.select}
+          value={order}
+        >
+          <option key={"asc"} value="asc">
+            Ascendente
+          </option>
+          <option key={"desc"} value="desc">
+            Descendente
+          </option>
+        </select>
+      </div>
 
       {/* temperament-------------- */}
       <div className={s.temperaments}>
@@ -143,11 +151,18 @@ export function Filters({ setCurrentPage }) {
           <span>No se recuperaron los temperamentos</span>
         )}
       </div>
-      <div>
-        <button onClick={applyHandler}>Aplicar temperamentos</button>
-        <button onClick={resetHandler}>Resetear</button>
+      <div className={s.btns}>
+        <button className={s.apply_btn} onClick={applyHandler}>
+          Aplicar temperamentos
+        </button>
+        <button className={s.reset_btn} onClick={resetHandler}>
+          Resetear
+        </button>
       </div>
-      <NavLink to="/home/create">Crear Perro</NavLink>
+
+      <NavLink to="/home/create" className={s.create_btn_div}>
+        Crear Perro
+      </NavLink>
     </div>
   );
 }

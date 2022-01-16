@@ -14,14 +14,16 @@ export default function SearchBar() {
   };
   const handlerSubmit = (e) => {
     e.preventDefault();
+    console.log("kexxxxx", e.key);
     dispatch(getSearchedDogs(searching.state));
-    setSearching({ state: "" });
+    // setSearching({ state: "" });
   };
 
   //retuuuuur -------------------------------
   return (
     <div className={s.searchbar_box}>
       <input
+        onKeyDown={(e) => e.key === "Enter" && handlerSubmit(e)}
         className={s.input_1}
         value={searching.state}
         onChange={(e) => onHandler(e)}

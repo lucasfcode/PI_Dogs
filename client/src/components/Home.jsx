@@ -30,9 +30,12 @@ export default function Home() {
 
   return (
     <div className={sHome.home}>
-      <Search />
-      <Filters />
-
+      <Pages
+        setCurrentPage={setCurrentPage}
+        allDogs={reduxState.filtered}
+        render={render}
+        currentPage={currentPage}
+      />
       {
         <div className={dogStyle.dogs_container}>
           {currentRender.length ? (
@@ -44,6 +47,7 @@ export default function Home() {
           )}
         </div>
       }
+      <Filters />
       <Pages
         setCurrentPage={setCurrentPage}
         allDogs={reduxState.filtered}

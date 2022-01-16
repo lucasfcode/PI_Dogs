@@ -9,6 +9,7 @@ import {
   descOrder,
   getCreated,
   getOnlyApi,
+  getAllSelect,
 } from "../redux/actions";
 import s from "./css/filters.module.css";
 
@@ -22,21 +23,29 @@ export function Filters({ setCurrentPage }) {
   );
   const [selected, setSelected] = React.useState([]);
   const [order, setOrder] = React.useState("asc");
+  //estado controlador del selector all, api, created
   const [orderBy, setOrderby] = React.useState("abc");
   const [all, setAll] = React.useState("");
-  let navigate = useNavigate();
 
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
   const createdHandler = (value) => {
-    console.log("from created", value);
     setAll(value);
+    //limpio el array de filtros para que no se acumulen
+    setSelected([]);
+    //reseteo los checkboxs
+    setCheckedState(new Array(124).fill(false));
+
     if (value === "created") {
       dispatcher(getCreated());
+      //seteo a 1 el paginado, para que renderice bien
+      setCurrentPage(1);
     } else if (value === "api") {
       dispatcher(getOnlyApi());
     } else {
       //traigo a todos los perros
-      getAllDogs(dispatcher);
+      resetHandler();
+
+      getAllSelect();
     }
   };
   //maneja checkboxs
@@ -54,9 +63,8 @@ export function Filters({ setCurrentPage }) {
   };
   //aplicar filtros
   const applyHandler = () => {
-    console.log("Aplicando filtros");
-
     if (selected.length) dispatcher(filterByTemp(selected));
+    setCurrentPage(1);
   };
 
   //ordenar
@@ -90,7 +98,7 @@ export function Filters({ setCurrentPage }) {
   return (
     <div className={s.filter_box}>
       <div className={s.selects_box}>
-        {/* all api created */}
+        {/* ----------------all api created ----------------*/}
         <select
           onChange={(e) => createdHandler(e.target.value)}
           className={s.select}
@@ -100,7 +108,7 @@ export function Filters({ setCurrentPage }) {
           <option value="api">Api</option>
           <option value="created">Creados</option>
         </select>
-        {/* Peso o Alfabeto */}
+        {/* --------Peso o Alfabeto --------*/}
         <select
           className={s.select}
           value={orderBy}
@@ -126,7 +134,7 @@ export function Filters({ setCurrentPage }) {
         </select>
       </div>
 
-      {/* temperament-------------- */}
+      {/* --------temperament-------------- */}
       <div className={s.temperaments}>
         <h3>Filtrar por Temperamento</h3>
         <br />

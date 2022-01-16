@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import s from "./css/details.module.css";
-import { useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import Modal from "./Modal";
-
+import arrow from "../images/arrow.png";
+import { NavLink } from "react-router-dom";
 export default function Details() {
   const dogs = useSelector((state) => state.dogs);
   let { dogId } = useParams();
@@ -11,6 +12,7 @@ export default function Details() {
   const open = () => {
     setPop(!pop);
   };
+  let navigate = useNavigate();
 
   let thisDog = dogs.find((d) => d.id.toString() === dogId.toString());
 
@@ -24,9 +26,13 @@ export default function Details() {
       : thisDog.temperament);
   let weight =
     thisDog && (thisDog.database ? thisDog.weight : thisDog.weight.metric);
+  const back = () => navigate(-1);
 
   return (
     <div className={s.main_box}>
+      <div onClick={back} className={s.arrow}>
+        <img src={arrow} alt="arrow.img" />
+      </div>
       <Modal
         pop={pop}
         setPop={setPop}

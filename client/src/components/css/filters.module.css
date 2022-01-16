@@ -8,6 +8,7 @@
   /* display: flex;
   flex-flow: row wrap;
   justify-content: flex-start; */
+  position: relative;
 }
 .selects_box,
 .temperaments {
@@ -35,7 +36,7 @@
   display: flex;
   flex-flow: row wrap;
   width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: auto;
 }
 h3 {
@@ -70,7 +71,7 @@ h3 {
   width: 100%;
   justify-content: space-between;
   padding: 1px 0px;
-  height: 3%;
+  height: 50px;
   margin-bottom: 3%;
 }
 .apply_btn {
@@ -100,7 +101,7 @@ h3 {
 }
 .create_btn_div {
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 8px;
   margin-bottom: 5px;
   width: 100%;
   height: 50px;

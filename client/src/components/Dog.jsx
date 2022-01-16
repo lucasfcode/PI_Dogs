@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import s from "./css/dog.module.css";
+
 export default function Dog(props) {
   // declaro temperament porque los dogs creados me devuelven un array
   let temperament = props.aDog.temperaments
@@ -8,8 +9,8 @@ export default function Dog(props) {
     : props.aDog.temperament;
 
   return (
-    <div className={s.dog}>
-      <div className={s.img_container}>
+    <div className={`${s.dog}`}>
+      <div className={`${s.img_container}`}>
         <img
           src={props.aDog.image.url || props.aDog.image}
           alt="Img_dog"

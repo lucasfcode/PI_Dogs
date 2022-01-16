@@ -6,10 +6,9 @@ export default function Nav() {
   return (
     <nav className={s.main}>
       <h1 className={s.main_title}>
-        {" "}
-        <NavLink to="/home" className={s.NavLInk}>
+        <a href="/home" className={s.NavLInk}>
           Dogs App{" "}
-        </NavLink>
+        </a>
       </h1>
 
       <SearchBar />

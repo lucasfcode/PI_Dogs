@@ -13,7 +13,19 @@
   );
   position: relative;
   display: flex;
+  flex-flow: wrap;
   justify-content: space-around;
+}
+.arrow {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  background-color: #05193700;
+  color: black;
+  border: none;
+  /* font-size: 80px; */
+  /* padding: 10px; */
+  width: 7%;
 }
 .details_box {
   display: flex;

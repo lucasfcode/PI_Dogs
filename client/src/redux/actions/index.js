@@ -10,6 +10,7 @@ export const GET_ONLY_API = "GET_ONLY_API";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const CREATE_DOG = "CREATE_DOG";
+export const GET_ALL = " GET_ALL";
 
 export const getAllDogs = (dispatch) => {
   return fetch(`http://localhost:3001/dogs`)
@@ -50,24 +51,12 @@ export const getSearchedDogs = (toSearch) => {
 };
 
 export const filterByTemp = (value) => {
+  //value ya está en mayúscula
   return {
     type: FILTER_BY_TEMPERAMENT,
     payload: value,
   };
 };
-
-// export const orderByName = (value) => {
-//   return {
-//     type: ORDER_BY_NAME,
-//     payload: value,
-//   };
-// };
-// export const orderByWeight = (value) => {
-//   return {
-//     type: ORDER_BY_WEIGHT,
-//     payload: value,
-//   };
-// };
 
 export const ascOrder = (value) => {
   console.log("Se ejecuto ascOrder con el valor ", value);
@@ -86,6 +75,12 @@ export const descOrder = (value) => {
 export const getCreated = () => {
   return {
     type: GET_CREATED,
+    payload: "",
+  };
+};
+export const getAllSelect = () => {
+  return {
+    type: GET_ALL,
     payload: "",
   };
 };

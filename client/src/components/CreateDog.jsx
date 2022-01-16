@@ -3,6 +3,7 @@ import createCss from "./css/create.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createDog, getAllDogs } from "../redux/actions";
+import Nav from "./Nav";
 
 export default function CreateDog() {
   const temperament = useSelector((state) =>
@@ -228,210 +229,213 @@ export default function CreateDog() {
   };
 
   return (
-    <section>
-      <NavLink to="/home">
-        <h1>Home</h1>
-      </NavLink>
-      <h1 className={createCss.title}>Crea tu propia raza</h1>
-      <form onSubmit={(e) => onSubmit(e)} className={createCss.form}>
-        {/* {" ---------------Name--------------"} */}
-        <div className={createCss.containers}>
-          <label value="Raza" className={createCss.raza_label}>
-            <h4>Raza </h4>
-            *
-            <input
-              required
-              onChange={(e) => onName(e)}
-              onBlur={(e) => blurHandler(e)}
-              type="text"
-              name="name"
-              autoFocus
-              value={formState.name}
-            />
-          </label>
-          {errors.name && (
-            <span className={createCss.error}>{errors.name}</span>
-          )}
-        </div>
-
-        {/* ---------------image--------- */}
-        <div className={createCss.containers}>
-          <label htmlFor="image" className={createCss.image_label}>
-            <h4>Imagen </h4>
-            <input
-              onChange={(e) => onImage(e)}
-              onBlur={(e) => blurHandler(e)}
-              type="text"
-              name="image"
-              placeholder="Url de la imagen.."
-              value={formState.image}
-            />
-            <div className={createCss.img_box}>
-              <img
-                src={formState.image}
-                alt="Su perro img"
-                width="300"
-                className={createCss.image_label_img}
-              />
-            </div>
-          </label>
-          {errors.image && (
-            <span className={createCss.error}>{errors.image}</span>
-          )}
-        </div>
-
-        {/* ---------------Height------------ */}
-        <div className={createCss.containers}>
-          <label htmlFor="height" className={createCss.height_label}>
-            <h4>Altura</h4>
-            <div className={createCss.min_max}>
+    <React.Fragment>
+      <Nav />
+      <section>
+        <h1 className={createCss.title}>Crea tu propia raza</h1>
+        <form onSubmit={(e) => onSubmit(e)} className={createCss.form}>
+          {/* {" ---------------Name--------------"} */}
+          <div className={createCss.containers}>
+            <label value="Raza" className={createCss.raza_label}>
+              <h4>Raza </h4>
+              *
               <input
-                placeholder="Mínima"
+                required
+                onChange={(e) => onName(e)}
                 onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onHeight(e)}
-                id="min_height"
-                type="number"
-                name="height"
-                value={formState.height.min}
+                type="text"
+                name="name"
+                autoFocus
+                value={formState.name}
               />
-              <input
-                placeholder="Máxima..."
-                onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onHeight(e)}
-                type="number"
-                id="max_height"
-                name="height"
-                value={formState.height.max}
-              />
-            </div>
-          </label>
-          {errors.height && (
-            <span className={createCss.error}>{errors.height}</span>
-          )}
-        </div>
-
-        {/* ---------------weight------------ */}
-        <div className={createCss.containers}>
-          <label htmlFor="weight" className={createCss.weight_label}>
-            <h4>Peso</h4>
-
-            <div className={createCss.min_max}>
-              <input
-                placeholder="Mínimo"
-                onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onWeight(e)}
-                type="number"
-                id="min_weight"
-                name="weight"
-                value={formState.weight.min}
-              />
-
-              <input
-                placeholder="Máximo"
-                onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onWeight(e)}
-                type="number"
-                id="max_weight"
-                name="weight"
-                value={formState.weight.max}
-              />
-            </div>
-          </label>
-          {errors.weight && (
-            <span className={createCss.error}>{errors.weight}</span>
-          )}
-        </div>
-
-        {/* ---------------Live-------------- */}
-        <div className={createCss.containers}>
-          <label htmlFor="live" className={createCss.live_label}>
-            <h4>Promedio de vida</h4>
-            <div className={createCss.min_max}>
-              <input
-                placeholder="Mínimo"
-                onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onLive(e)}
-                type="number"
-                id="min_age"
-                name="yearsOfLife"
-                value={formState.yearsOfLife.min}
-              />
-
-              <input
-                placeholder="Máximo"
-                onBlur={(e) => blurHandler(e)}
-                onChange={(e) => onLive(e)}
-                type="number"
-                id="max_age"
-                name="yearsOfLife"
-                value={formState.yearsOfLife.max}
-              />
-            </div>
-          </label>
-          {errors.yearsOfLife && (
-            <span className={createCss.error}>{errors.yearsOfLife}</span>
-          )}
-        </div>
-
-        {/*  ---------------temeperament---------*/}
-        <div className={createCss.temperament_box}>
-          <h4>Temperamento</h4>
-          <div className={createCss.select_div_box}>
-            <select
-              onChange={(e) => onTemperament(e)}
-              onBlur={(e) => blurHandler(e)}
-            >
-              {temperament.length ? (
-                temperament.map((temp, idx) => (
-                  <option key={temp} value={temp}>
-                    {temp}
-                  </option>
-                ))
-              ) : (
-                <option>Cargando...</option>
-              )}
-            </select>
-            {errors.temperaments && (
-              <span className={createCss.error}>{errors.temperaments}</span>
+            </label>
+            {errors.name && (
+              <span className={createCss.error}>{errors.name}</span>
             )}
-            <div className={createCss.selected_temps_box}>
-              {selectedTemps.map((temp) => (
-                <span key={temp}>
-                  {temp}
-                  <button name={temp} onClick={(e) => deleteTemp(e)}>
-                    X
-                  </button>
-                </span>
-              ))}
+          </div>
+
+          {/* ---------------image--------- */}
+          <div className={createCss.containers}>
+            <label htmlFor="image" className={createCss.image_label}>
+              <h4>Imagen </h4>
+              <input
+                onChange={(e) => onImage(e)}
+                onBlur={(e) => blurHandler(e)}
+                type="text"
+                name="image"
+                placeholder="Url de la imagen.."
+                value={formState.image}
+              />
+              <div className={createCss.img_box}>
+                <img
+                  src={formState.image}
+                  alt="Su perro img"
+                  width="300"
+                  className={createCss.image_label_img}
+                />
+              </div>
+            </label>
+            {errors.image && (
+              <span className={createCss.error}>{errors.image}</span>
+            )}
+          </div>
+
+          {/* ---------------Height------------ */}
+          <div className={createCss.containers}>
+            <label htmlFor="height" className={createCss.height_label}>
+              <h4>Altura</h4>
+              <div className={createCss.min_max}>
+                <input
+                  placeholder="Mínima"
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onHeight(e)}
+                  id="min_height"
+                  type="number"
+                  name="height"
+                  value={formState.height.min}
+                />
+                <input
+                  placeholder="Máxima..."
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onHeight(e)}
+                  type="number"
+                  id="max_height"
+                  name="height"
+                  value={formState.height.max}
+                />
+              </div>
+            </label>
+            {errors.height && (
+              <span className={createCss.error}>{errors.height}</span>
+            )}
+          </div>
+
+          {/* ---------------weight------------ */}
+          <div className={createCss.containers}>
+            <label htmlFor="weight" className={createCss.weight_label}>
+              <h4>Peso</h4>
+
+              <div className={createCss.min_max}>
+                <input
+                  placeholder="Mínimo"
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onWeight(e)}
+                  type="number"
+                  id="min_weight"
+                  name="weight"
+                  value={formState.weight.min}
+                />
+
+                <input
+                  placeholder="Máximo"
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onWeight(e)}
+                  type="number"
+                  id="max_weight"
+                  name="weight"
+                  value={formState.weight.max}
+                />
+              </div>
+            </label>
+            {errors.weight && (
+              <span className={createCss.error}>{errors.weight}</span>
+            )}
+          </div>
+
+          {/* ---------------Live-------------- */}
+          <div className={createCss.containers}>
+            <label htmlFor="live" className={createCss.live_label}>
+              <h4>Promedio de vida</h4>
+              <div className={createCss.min_max}>
+                <input
+                  placeholder="Mínimo"
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onLive(e)}
+                  type="number"
+                  id="min_age"
+                  name="yearsOfLife"
+                  value={formState.yearsOfLife.min}
+                />
+
+                <input
+                  placeholder="Máximo"
+                  onBlur={(e) => blurHandler(e)}
+                  onChange={(e) => onLive(e)}
+                  type="number"
+                  id="max_age"
+                  name="yearsOfLife"
+                  value={formState.yearsOfLife.max}
+                />
+              </div>
+            </label>
+            {errors.yearsOfLife && (
+              <span className={createCss.error}>{errors.yearsOfLife}</span>
+            )}
+          </div>
+
+          {/*  ---------------temeperament---------*/}
+          <div className={createCss.temperament_box}>
+            <h4>Temperamento</h4>
+            <div className={createCss.select_div_box}>
+              <select
+                onChange={(e) => onTemperament(e)}
+                onBlur={(e) => blurHandler(e)}
+              >
+                {temperament.length ? (
+                  temperament.map((temp, idx) => (
+                    <option key={temp} value={temp}>
+                      {temp}
+                    </option>
+                  ))
+                ) : (
+                  <option>Cargando...</option>
+                )}
+              </select>
+              {errors.temperaments && (
+                <span className={createCss.error}>{errors.temperaments}</span>
+              )}
+              <div className={createCss.selected_temps_box}>
+                {selectedTemps.map((temp) => (
+                  <span key={temp}>
+                    {temp}
+                    <button name={temp} onClick={(e) => deleteTemp(e)}>
+                      X
+                    </button>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* ---------------description--------- */}
-        <div className={createCss.containers}>
-          <h4>Descripcion</h4>
-          <label htmlFor="description" className={createCss.description_label}>
-            <textarea
-              placeholder="Escribe algo sobre tu perro!"
-              onBlur={(e) => blurHandler(e)}
-              onChange={(e) => onDescription(e)}
-              cols="20"
-              rows="10"
-              name="description"
-              value={formState.description}
-            />
-          </label>
-          {errors.description && (
-            <span className={createCss.error}>{errors.description}</span>
-          )}
-        </div>
+          {/* ---------------description--------- */}
+          <div className={createCss.containers}>
+            <h4>Descripcion</h4>
+            <label
+              htmlFor="description"
+              className={createCss.description_label}
+            >
+              <textarea
+                placeholder="Escribe algo sobre tu perro!"
+                onBlur={(e) => blurHandler(e)}
+                onChange={(e) => onDescription(e)}
+                cols="20"
+                rows="10"
+                name="description"
+                value={formState.description}
+              />
+            </label>
+            {errors.description && (
+              <span className={createCss.error}>{errors.description}</span>
+            )}
+          </div>
 
-        {/* -----------submit---------- */}
-        <div className={createCss.submit_box}>
-          <input type="submit" />
-          <input type="reset" onClick={() => resetAll()} />
-        </div>
-      </form>
-    </section>
+          {/* -----------submit---------- */}
+          <div className={createCss.submit_box}>
+            <input type="submit" />
+            <input type="reset" onClick={() => resetAll()} />
+          </div>
+        </form>
+      </section>
+    </React.Fragment>
   );
 }

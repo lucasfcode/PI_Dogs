@@ -15,7 +15,7 @@
 }
 .main img {
   width: 68%;
-
+  cursor: initial;
   border-radius: 5%;
   margin: 0 auto;
 }

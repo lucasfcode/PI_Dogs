@@ -1,11 +1,11 @@
 .main {
   background-image: linear-gradient(
     to left bottom,
-    #051937,
-    #394862,
-    #6e7d90,
-    #aab5c0,
-    #ecf0f3
+    #000000,
+    #141212,
+    #201e1c,
+    #2a2a26,
+    #333732
   );
   display: flex;
   flex-flow: row wrap;
@@ -13,7 +13,7 @@
   align-items: flex-end;
   width: 98%;
   margin: auto;
-  padding: 15px 20px;
+  padding: 10px 20px;
 }
 .main_title {
   cursor: pointer;
@@ -24,10 +24,15 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+  /* 
+   */
 }
 .main_title:hover {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .main_title .NavLInk {
   text-decoration: none;
+  color: #393e41;
 }

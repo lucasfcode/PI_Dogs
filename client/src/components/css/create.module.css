@@ -2,20 +2,31 @@ section {
   min-height: 100vh;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   width: 60%;
-  padding: 5%;
+  padding: 2% 4%;
   background: #ecf0f3;
 }
+.arrow {
+  position: absolute;
+  left: 15%;
+  top: 10px;
+  background-color: #f6f7f800;
+  color: rgb(199, 176, 176);
+  border: none;
+  /* font-size: 80px; */
+  /* padding: 10px; */
+  width: 7%;
+}
 .error {
-  color: red;
+  color: rgb(212, 28, 28);
   padding: 5px;
 
   animation-name: error;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 
   -webkit-animation-name: error;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: 3s;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
 }

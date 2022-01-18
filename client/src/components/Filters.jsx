@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,6 +10,8 @@ import {
   getCreated,
   getOnlyApi,
   getAllSelect,
+  orderByName,
+  orderByWeight,
 } from "../redux/actions";
 import s from "./css/filters.module.css";
 
@@ -22,16 +24,22 @@ export function Filters({ setCurrentPage }) {
     new Array(124).fill(false)
   );
   const [selected, setSelected] = React.useState([]);
-  const [order, setOrder] = React.useState("asc");
+
   //estado controlador del selector all, api, created
   const [orderBy, setOrderby] = React.useState("abc");
+  //estado de orden ascendente o descendente
+  const [order, setOrder] = React.useState("asc");
+
   const [all, setAll] = React.useState("");
 
   //si target.checked es true agregar, sino redefinir quitando los nombres que no esten en true
   const createdHandler = (value) => {
+    //seteo el estado que maneja 'Todos' en el select
     setAll(value);
     //limpio el array de filtros para que no se acumulen
     setSelected([]);
+    //seteo el orderBy con su handler
+    orderByH("abc");
     //reseteo los checkboxs
     setCheckedState(new Array(124).fill(false));
 
@@ -44,7 +52,7 @@ export function Filters({ setCurrentPage }) {
     } else {
       //traigo a todos los perros
       resetHandler();
-
+      //llamo a todos los dog otra vez
       getAllSelect();
     }
   };
@@ -61,13 +69,42 @@ export function Filters({ setCurrentPage }) {
       ? setSelected((prev) => [...prev, name])
       : setSelected((prev) => prev.filter((e) => e !== name));
   };
+
   //aplicar filtros
   const applyHandler = () => {
-    if (selected.length) dispatcher(filterByTemp(selected));
+    //valor de lprimer select
+    let conditional = all;
+    if (selected.length) {
+      //aplico los filtros anteriores (selected, order, api) para que filtered vuelva a recargar los dogs
+      //y que no queden residuos de algun filtro anterior
+      console.log(
+        "por filtrar: dentro de applyHandler entro en el if ",
+        selected
+      );
+      //aplico el reducer de filtros a todos los dogs
+      dispatcher(filterByTemp(conditional, selected));
+    }
+    //seteo el orden y asc
+    orderByH("abc");
+    orderHandler("asc");
     setCurrentPage(1);
   };
 
   //ordenar
+  //orderBy namo or weight handler
+  const orderByH = (option) => {
+    setOrderby(option);
+
+    if (option === "abc") {
+      dispatcher(orderByName(option));
+      //reseteo el filtro debajo (asc o desc)
+      setOrder("asc");
+    } else {
+      dispatcher(orderByWeight(option));
+      //reseteo el filtro debajo (asc o desc)
+      setOrder("asc");
+    }
+  };
   const orderHandler = (value) => {
     setOrder(value);
     value === "asc"
@@ -75,13 +112,6 @@ export function Filters({ setCurrentPage }) {
       : value === "desc"
       ? dispatcher(descOrder(orderBy))
       : console.error("error en orderHandler");
-  };
-  const orderByHandler = (e) => {
-    setOrderby(e.target.value);
-    //debo usar dispatch para aplicar cambios
-    dispatcher(
-      order === "asc" ? ascOrder(e.target.value) : descOrder(e.target.value)
-    );
   };
 
   //resetear filtros
@@ -93,6 +123,7 @@ export function Filters({ setCurrentPage }) {
     setOrderby("abc");
     dispatcher(ascOrder());
     getAllDogs(dispatcher);
+    setSelected([]);
   };
 
   return (
@@ -114,7 +145,7 @@ export function Filters({ setCurrentPage }) {
           value={orderBy}
           name=""
           id=""
-          onChange={(e) => orderByHandler(e)}
+          onChange={(e) => orderByH(e.target.value)}
         >
           <option value="abc">Alfabeticamente</option>
           <option value="peso">Por peso</option>
@@ -143,7 +174,7 @@ export function Filters({ setCurrentPage }) {
         {/* ---------Filtrar por temperamento */}
         {tempsOrdened.length ? (
           tempsOrdened.map((t, id) => (
-            <label key={id} className={s.label}>
+            <label key={id} className={`${s.label}`}>
               <input
                 onChange={(e) => checkHandler(e)}
                 type="checkbox"

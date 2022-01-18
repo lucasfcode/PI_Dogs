@@ -9,8 +9,11 @@ import {
   GET_ONLY_API,
   CREATE_DOG,
   GET_ALL,
+  ORDER_BY_NAME,
+  ORDER_BY_WEIGHT,
 } from "../actions";
 import {} from "../actions";
+import { orderNameFn, orderWeightFn } from "./controllers";
 
 const initialState = {
   dogs: [],
@@ -22,11 +25,14 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_DOGS:
-      console.log("se ejecuto getAlldogs");
+      console.log("se ejecuto getAlldogs en reducer");
+      //devuelvo los dogs ordenados por nombre por default
       return {
         ...state,
         dogs: action.payload,
-        filtered: action.payload,
+        filtered: action.payload.sort((a, b) =>
+          a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1
+        ),
       };
     case GET_CREATED:
       let created = state.dogs.filter((dog) => (dog.database ? true : false));
@@ -37,6 +43,7 @@ export default function rootReducer(state = initialState, action) {
         filtered: created,
       };
     case GET_ALL:
+      //refiere al select 'Todos'
       return {
         ...state,
         filtered: state.dogs,
@@ -60,10 +67,29 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         filtered: action.payload,
       };
+    case ORDER_BY_NAME:
+      return {
+        ...state,
+        filtered: orderNameFn(state.filtered),
+      };
+    case ORDER_BY_WEIGHT:
+      return {
+        ...state,
+        filtered: orderWeightFn(state.filtered),
+      };
     case FILTER_BY_TEMPERAMENT:
-      console.log("por filtrar---->", state.filtered.length);
-      console.log("action payload", action.payload);
-      const filter = state.filtered.filter((dog) => {
+      //destructuring de ambos valores del action.payload
+      const { conditionals, selected } = action.payload;
+      //el filter se hará dependiendo de el orderBy
+      let dogsWithConditional =
+        conditionals === "" || conditionals === "all"
+          ? state.dogs
+          : conditionals === "api"
+          ? state.dogs.filter((dog) => !dog.database)
+          : state.dogs.filter((dog) => (dog.database ? true : false));
+      console.log("dogsWidthconditional tamano", dogsWithConditional.length);
+      //filtrado de todos los dogs
+      const filter = dogsWithConditional.filter((dog) => {
         //dogs.temperament--> string
         //action.payload--> array
         //cada elemento del payload debe existir en las temps del dog. Es un concicional &&
@@ -84,7 +110,7 @@ export default function rootReducer(state = initialState, action) {
         //filter &&
         if (toAnalyze) {
           //si Todos los elementos pasan el boolean, devuelve true
-          let validator = action.payload.every((tempUser) =>
+          let validator = selected.every((tempUser) =>
             toAnalyze.includes(tempUser)
           );
 
@@ -94,6 +120,7 @@ export default function rootReducer(state = initialState, action) {
           return false;
         }
       });
+
       return {
         ...state,
         filtered: filter
@@ -102,56 +129,27 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case ASCENDENT:
-      //doble sort porque primero se ordena en funcion al valor minimo  y luego al minimo y maximo del peso. Si no devuelvo un map, no recibo el arreglo ordenado. Trabaja sobre los dogs de filtered
-
-      let orderWeight = state.filtered
-        .sort((a, b) => {
-          let pesoA = a.database ? a.weight : a.weight.metric;
-          let pesoB = b.database ? b.weight : b.weight.metric;
-          return Number(pesoA.split("-")[0]) - Number(pesoB.split("-")[0]);
-        })
-        .sort((a, b) => {
-          let pesoA = a.database ? a.weight : a.weight.metric;
-          let pesoB = b.database ? b.weight : b.weight.metric;
-          return Number(pesoA.split("-")[1]) - Number(pesoB.split("-")[1]);
-        })
-        .map((e) => e);
-
-      let orderName = state.filtered.sort((a, b) => (a.name > b.name ? 1 : -1));
-
       if (action.payload === "peso") {
         return {
           ...state,
-          filtered: orderWeight,
+          filtered: orderWeightFn(state.filtered),
         };
       } else
         return {
           ...state,
-          filtered: orderName,
+          filtered: orderNameFn(state.filtered),
         };
 
     case DESCENDENT:
       if (action.payload === "peso") {
-        let orderWeight = state.filtered
-          .sort((a, b) => {
-            let pesoA = a.database ? a.weight : a.weight.metric;
-            let pesoB = b.database ? b.weight : b.weight.metric;
-            return Number(pesoA.split("-")[0]) - Number(pesoB.split("-")[0]);
-          })
-          .sort((a, b) => {
-            let pesoA = a.database ? a.weight : a.weight.metric;
-            let pesoB = b.database ? b.weight : b.weight.metric;
-            return Number(pesoA.split("-")[1]) - Number(pesoB.split("-")[1]);
-          })
-          .map((e) => e);
         return {
           ...state,
-          filtered: orderWeight.reverse(),
+          filtered: orderWeightFn(state.filtered).reverse(),
         };
       } else {
         return {
           ...state,
-          filtered: state.filtered.reverse(),
+          filtered: orderNameFn(state.filtered).reverse(),
         };
       }
     case CREATE_DOG:

@@ -50,14 +50,27 @@ export const getSearchedDogs = (toSearch) => {
   };
 };
 
-export const filterByTemp = (value) => {
+export const filterByTemp = (conditionals, selected) => {
   //value ya está en mayúscula
   return {
     type: FILTER_BY_TEMPERAMENT,
+    payload: { conditionals, selected },
+  };
+};
+export const orderByName = (value) => {
+  console.log("se dispacho by Order");
+  return {
+    type: ORDER_BY_NAME,
     payload: value,
   };
 };
-
+export const orderByWeight = (value) => {
+  console.log("se dispacho orderByWeight", value);
+  return {
+    type: ORDER_BY_WEIGHT,
+    payload: value,
+  };
+};
 export const ascOrder = (value) => {
   console.log("Se ejecuto ascOrder con el valor ", value);
   return {
@@ -78,6 +91,7 @@ export const getCreated = () => {
     payload: "",
   };
 };
+//select refiere a que se un tag select--> opcion 'Todos' del select
 export const getAllSelect = () => {
   return {
     type: GET_ALL,

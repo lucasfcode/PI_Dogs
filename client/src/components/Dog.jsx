@@ -18,7 +18,11 @@ export default function Dog(props) {
         />
       </div>
       <div className={s.name}>
-        <Link to={`/home/details/${props.aDog.id}`} className={s.link}>
+        <Link
+          to={`/home/details/${props.aDog.id}`}
+          onClick={() => window.scrollTo(0, 0)}
+          className={s.link}
+        >
           <h2>{props.aDog.name}</h2>
         </Link>
       </div>

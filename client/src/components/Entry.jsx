@@ -4,8 +4,16 @@ import s from "./css/entry.module.css";
 export default function Entry() {
   return (
     <div className={s.entry}>
-      <h1>Welcome to Henry Dogs</h1>
-      <NavLink to={"/home"}>Ingresar</NavLink>
+      <div className={s.nine}>
+        <h1 className={s.h1}>
+          Elige tu <del>Camino</del> Canino{" "}
+          <span className={s.link_box}>
+            <NavLink to={"/home"} className={s.ingresar}>
+              Ingresar
+            </NavLink>
+          </span>
+        </h1>
+      </div>
     </div>
   );
 }

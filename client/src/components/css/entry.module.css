@@ -1,5 +1,62 @@
 .entry {
-  background-color: rgb(253, 253, 255);
+  background: #3a44494b;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.226);
+  backdrop-filter: blur(5.3px);
+  -webkit-backdrop-filter: blur(5.3px);
+
   border-radius: 5px;
-  padding: 3%;
+  padding: 4%;
+  width: 100%;
+  /* margin-bottom: 35%; */
+  align-self: flex-start;
+}
+
+.h1 {
+  text-align: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  color: #b9c9d4;
+  letter-spacing: 1px;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+}
+.link_box {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #444;
+  word-spacing: 1px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.link_box:after,
+.link_box:before {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid rgb(17, 7, 7);
+  border-top: 1px solid rgb(17, 7, 7);
+  height: 5px;
+  background-color: rgb(37, 26, 26);
+}
+
+.ingresar {
+  color: #b9c9d4;
+  text-decoration: none;
+  font-size: 20px;
+}
+.ingresar:hover {
+  background: #191d20b7;
+  border-radius: 10px;
+
+  padding: 8px;
 }

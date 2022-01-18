@@ -1,8 +1,8 @@
 import React from "react";
 import SearchBar from "./Search";
 import s from "./css/nav.module.css";
-import { NavLink } from "react-router-dom";
-export default function Nav() {
+
+export default function Nav({ setCurrentPage }) {
   return (
     <nav className={s.main}>
       <h1 className={s.main_title}>
@@ -11,7 +11,7 @@ export default function Nav() {
         </a>
       </h1>
 
-      <SearchBar />
+      <SearchBar setCurrentPage={setCurrentPage} />
     </nav>
   );
 }

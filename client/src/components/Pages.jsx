@@ -7,10 +7,13 @@ export default function Pages({
   render,
   currentPage,
 }) {
-  console.log();
   const pageNumbers = allDogs
     .map((e, index) => index + 1)
     .slice(0, Math.ceil(allDogs.length / render));
+  const activeHandler = (number) => {
+    setCurrentPage(number);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className={s.pages}>
@@ -19,7 +22,7 @@ export default function Pages({
           pageNumbers.map((number, i) => (
             <li
               key={i}
-              onClick={() => setCurrentPage(number)}
+              onClick={() => activeHandler(number)}
               className={currentPage === number ? s.active : ""}
             >
               {number}

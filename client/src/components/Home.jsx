@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div className={sHome.home}>
-      <Nav />
+      <Nav setCurrentPage={setCurrentPage} />
 
       <Pages
         setCurrentPage={setCurrentPage}

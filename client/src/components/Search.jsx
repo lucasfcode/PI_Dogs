@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getSearchedDogs } from "../redux/actions";
 import s from "./css/search.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({ setCurrentPage }) {
   const [searching, setSearching] = React.useState({
     state: "",
   });
@@ -16,6 +16,7 @@ export default function SearchBar() {
     e.preventDefault();
     console.log("kexxxxx", e.key);
     dispatch(getSearchedDogs(searching.state));
+    setCurrentPage(1);
     // setSearching({ state: "" });
   };
 

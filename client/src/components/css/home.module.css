@@ -6,6 +6,7 @@
   flex-flow: row wrap;
   width: 100%;
 }
+
 .nav_container {
   position: relative;
   width: 100%;
@@ -39,6 +40,7 @@
   padding: 5px;
   width: 2%;
   cursor: pointer;
+  font-size: 1.2em;
 }
 .pages ul li:hover {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;

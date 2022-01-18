@@ -1,11 +1,12 @@
 import React from "react";
 import createCss from "./css/create.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createDog, getAllDogs } from "../redux/actions";
-import Nav from "./Nav";
+import arrow from "../images/arrow.png";
 
 export default function CreateDog() {
+  const dispatcher = useDispatch();
   const temperament = useSelector((state) =>
     state.temperaments.map((e) => e.name).sort()
   );
@@ -25,6 +26,7 @@ export default function CreateDog() {
   let navigate = useNavigate();
 
   const goHome = () => {
+    getAllDogs(dispatcher);
     navigate("/home");
   };
 
@@ -220,18 +222,22 @@ export default function CreateDog() {
     let keys = Object.values(errors).some((value) => value !== undefined);
 
     let combined = { ...formState, temperament: selectedTemps };
+
     if (!keys) {
       createDog(combined);
-
       resetAll();
+
       goHome();
     } else return alert("Corrija los errores de los campos!");
   };
+  const back = () => navigate(-1);
 
   return (
     <React.Fragment>
-      <Nav />
       <section>
+        <div onClick={back} className={createCss.arrow}>
+          <img src={arrow} alt="arrow.img" />
+        </div>
         <h1 className={createCss.title}>Crea tu propia raza</h1>
         <form onSubmit={(e) => onSubmit(e)} className={createCss.form}>
           {/* {" ---------------Name--------------"} */}

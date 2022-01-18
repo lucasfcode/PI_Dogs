@@ -13,6 +13,9 @@ body {
   text-align: center;
   display: flex;
   justify-content: center;
-  flex-flow: row wrap;
   align-items: center;
+  height: 100vh;
+  flex-flow: row wrap;
+
+  font-family: Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif;
 }

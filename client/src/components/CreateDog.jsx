@@ -10,6 +10,12 @@ export default function CreateDog() {
   const temperament = useSelector((state) =>
     state.temperaments.map((e) => e.name).sort()
   );
+  React.useEffect(() => {
+    return () => {
+      console.log("ejecutado use EFFECT de create desmontado");
+      getAllDogs(dispatcher);
+    };
+  }, [dispatcher]);
 
   //los temperamentos se han guardado en un estado aparte para que no renderice todo, por el cambio del mismo
   const [selectedTemps, setSelectedTemps] = React.useState([]);
@@ -226,7 +232,7 @@ export default function CreateDog() {
     if (!keys) {
       createDog(combined);
       resetAll();
-
+      alert("Perro creado correctamente!");
       goHome();
     } else return alert("Corrija los errores de los campos!");
   };

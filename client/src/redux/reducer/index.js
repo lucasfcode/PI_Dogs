@@ -25,7 +25,7 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_DOGS:
-      console.log("se ejecuto getAlldogs en reducer");
+      // console.log("se ejecuto getAlldogs en reducer");
       //devuelvo los dogs ordenados por nombre por default
       return {
         ...state,
@@ -36,8 +36,8 @@ export default function rootReducer(state = initialState, action) {
       };
     case GET_CREATED:
       let created = state.dogs.filter((dog) => (dog.database ? true : false));
-      console.log("se ejecuto reducer created");
-      console.log("nuevo filtered", created);
+      // console.log("se ejecuto reducer created");
+      // console.log("nuevo filtered", created);
       return {
         ...state,
         filtered: created,
@@ -51,7 +51,7 @@ export default function rootReducer(state = initialState, action) {
 
     case GET_ONLY_API:
       let fromApi = state.dogs.filter((dog) => !dog.database);
-      console.log("se ejecuto reducer GET_API");
+      // console.log("se ejecuto reducer GET_API");
 
       return {
         ...state,
@@ -87,7 +87,7 @@ export default function rootReducer(state = initialState, action) {
           : conditionals === "api"
           ? state.dogs.filter((dog) => !dog.database)
           : state.dogs.filter((dog) => (dog.database ? true : false));
-      console.log("dogsWidthconditional tamano", dogsWithConditional.length);
+      // console.log("dogsWidthconditional tamano", dogsWithConditional.length);
       //filtrado de todos los dogs
       const filter = dogsWithConditional.filter((dog) => {
         //dogs.temperament--> string

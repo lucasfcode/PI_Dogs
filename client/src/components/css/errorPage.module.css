@@ -1,0 +1,15 @@
+.errorPage_container {
+  border-radius: 3px;
+  width: 70%;
+  padding: 10%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+}
+.errorPage_container h1 {
+  background: rgb(172, 17, 17);
+  padding: 5% 8%;
+  border-radius: 10px;
+}

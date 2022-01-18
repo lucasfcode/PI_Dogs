@@ -77,10 +77,10 @@ export function Filters({ setCurrentPage }) {
     if (selected.length) {
       //aplico los filtros anteriores (selected, order, api) para que filtered vuelva a recargar los dogs
       //y que no queden residuos de algun filtro anterior
-      console.log(
-        "por filtrar: dentro de applyHandler entro en el if ",
-        selected
-      );
+      // console.log(
+      //   "por filtrar: dentro de applyHandler entro en el if ",
+      //   selected
+      // );
       //aplico el reducer de filtros a todos los dogs
       dispatcher(filterByTemp(conditional, selected));
     }
@@ -116,7 +116,7 @@ export function Filters({ setCurrentPage }) {
 
   //resetear filtros
   const resetHandler = () => {
-    console.log("Filtros reseteados");
+    // console.log("Filtros reseteados");
     setCheckedState(new Array(124).fill(false));
     setAll("all");
     setOrder("asc");
@@ -187,7 +187,9 @@ export function Filters({ setCurrentPage }) {
             </label>
           ))
         ) : (
-          <span>No se recuperaron los temperamentos</span>
+          <div className={s.notTemps}>
+            Aún no se recuperaron los temperamentos
+          </div>
         )}
       </div>
       <div className={s.btns}>

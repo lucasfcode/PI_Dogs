@@ -14,16 +14,19 @@ export default function SearchBar({ setCurrentPage }) {
   };
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log("kexxxxx", e.key);
-    dispatch(getSearchedDogs(searching.state));
-    setCurrentPage(1);
+    if (searching.state.length) {
+      dispatch(getSearchedDogs(searching.state));
+      setCurrentPage(1);
+    } else alert("El campo de busqueda está vacío!");
+
     // setSearching({ state: "" });
   };
 
-  //retuuuuur -------------------------------
+  //retuuuuurn-------------------------------
   return (
     <div className={s.searchbar_box}>
       <input
+        placeholder="Buscar una raza..."
         onKeyDown={(e) => e.key === "Enter" && handlerSubmit(e)}
         className={s.input_1}
         value={searching.state}

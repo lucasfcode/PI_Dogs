@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import s from "./css/details.module.css";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Modal from "./Modal";
 import arrow from "../images/arrow.png";
-import { NavLink } from "react-router-dom";
+
 export default function Details() {
   const dogs = useSelector((state) => state.dogs);
   let { dogId } = useParams();

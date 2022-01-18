@@ -21,9 +21,20 @@ export default function Home() {
     firstPageIndex,
     lastPageIndex
   );
+  const [anim, setAnim] = React.useState(false);
+  React.useEffect(() => {
+    let timeO = setTimeout(() => {
+      setAnim((anim) => !anim);
+      timeO = null;
+    }, 10);
+
+    return () => {
+      clearTimeout(timeO);
+    };
+  }, []);
 
   return (
-    <div className={sHome.home}>
+    <div className={`${anim && sHome.opacity} ${sHome.home} `}>
       <Nav setCurrentPage={setCurrentPage} />
 
       <Pages
@@ -39,7 +50,7 @@ export default function Home() {
               return <Dog aDog={e} key={e.id} id={e.id} />;
             })
           ) : (
-            <NotFound />
+            <NotFound currentRender={currentRender} />
           )}
         </div>
       }

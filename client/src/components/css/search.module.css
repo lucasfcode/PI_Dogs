@@ -14,7 +14,7 @@
   /* padding: 1.5%; */
   background: #ecf0f3;
   box-shadow: inset 10px 10px 20px #cbced1, inset -10px -10px 20px #ffffff;
-  /* border: none; */
+  border: solid rgb(165, 137, 137);
   padding: 12px 20px;
   border-radius: 20px;
   font-weight: bold;
@@ -25,7 +25,7 @@
   text-align: center;
   padding: 10px;
   border-radius: 10px;
-  /* border: none; */
+  border: solid rgb(165, 137, 137);
 }
 .btn:hover {
   cursor: pointer;

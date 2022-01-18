@@ -40,7 +40,7 @@ export const getSearchedDogs = (toSearch) => {
     return fetch(`http://localhost:3001/dogs/?name=${toSearch}`)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         dispatch({
           type: GET_SEARCHED_DOGS,
           payload: json,
@@ -58,21 +58,21 @@ export const filterByTemp = (conditionals, selected) => {
   };
 };
 export const orderByName = (value) => {
-  console.log("se dispacho by Order");
+  // console.log("se dispacho by Order");
   return {
     type: ORDER_BY_NAME,
     payload: value,
   };
 };
 export const orderByWeight = (value) => {
-  console.log("se dispacho orderByWeight", value);
+  // console.log("se dispacho orderByWeight", value);
   return {
     type: ORDER_BY_WEIGHT,
     payload: value,
   };
 };
 export const ascOrder = (value) => {
-  console.log("Se ejecuto ascOrder con el valor ", value);
+  // console.log("Se ejecuto ascOrder con el valor ", value);
   return {
     type: ASCENDENT,
     payload: value,

@@ -7,7 +7,7 @@ export default function Nav({ setCurrentPage }) {
     <nav className={s.main}>
       <h1 className={s.main_title}>
         <a href="/home" className={s.NavLInk}>
-          Dogs App{" "}
+          Elige tu Canino
         </a>
       </h1>
 

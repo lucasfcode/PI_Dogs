@@ -10,14 +10,14 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   width: 98%;
   margin: auto;
   padding: 10px 20px;
 }
 .main_title {
   cursor: pointer;
-  padding: 15px;
+  padding: 8px 0px;
   border-radius: 8px;
   width: 10%;
   background: #ecf0f3;

@@ -80,7 +80,7 @@ export default function rootReducer(state = initialState, action) {
     case FILTER_BY_TEMPERAMENT:
       //destructuring de ambos valores del action.payload
       const { conditionals, selected } = action.payload;
-      //el filter se hará dependiendo de el orderBy
+      //en una variable le asigno en principio, a partir del el valor de orderBy
       let dogsWithConditional =
         conditionals === "" || conditionals === "all"
           ? state.dogs
@@ -91,10 +91,12 @@ export default function rootReducer(state = initialState, action) {
       //filtrado de todos los dogs
       const filter = dogsWithConditional.filter((dog) => {
         //dogs.temperament--> string
-        //action.payload--> array
         //cada elemento del payload debe existir en las temps del dog. Es un concicional &&
 
-        //temperamentos de los creados, vienen en [...]
+        //guardo los temperamentos del perro actual analizado (dog) en una variable, dependiendo si es Db o de la api
+        //los temperamentos del dog actual me van a servir para validar si coinciden con los selected
+
+        //temperamentos de la DB, vienen en [...]
         let createdTemps = dog.database
           ? dog.temperaments.map((t) => t.name.toUpperCase().trim())
           : undefined;
@@ -110,6 +112,9 @@ export default function rootReducer(state = initialState, action) {
         //filter &&
         if (toAnalyze) {
           //si Todos los elementos pasan el boolean, devuelve true
+          //evaluo si cada temperamento seleccionado existe dentro de los temperamentos del perro actual
+          //si alguno no existe, no me devolverá el perro actual
+          // selected -> [a, b, c]--> toAnalyze.include(a)?.. toAnalyze.include(v)?.. toAnalyze.include(c)?
           let validator = selected.every((tempUser) =>
             toAnalyze.includes(tempUser)
           );

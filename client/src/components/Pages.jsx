@@ -1,4 +1,5 @@
 import React from "react";
+
 import s from "./css/home.module.css";
 
 export default function Pages({
@@ -7,9 +8,15 @@ export default function Pages({
   render,
   currentPage,
 }) {
+  //la cantidad de paginas que voy a tener va a depender de cuantos objetos quiero mostrar por pagina
+  //en este casi quiero renderizar 8.. por lo que necesito saber la cantidad de elementos que tiene el array
+  //y luego dividir la totalidad por la cantidad que quiero renderizar
+  //el slice me muestra del indice 0 (index+1 = 1) hasta el resultado de la division (22)
   const pageNumbers = allDogs
     .map((e, index) => index + 1)
     .slice(0, Math.ceil(allDogs.length / render));
+
+  //controlador de página actual activa. Depende del numero donde haga click
   const activeHandler = (number) => {
     setCurrentPage(number);
     window.scrollTo(0, 0);

@@ -6,7 +6,7 @@ export default function Entry() {
     <div className={s.entry}>
       <div className={s.nine}>
         <h1 className={s.h1}>
-          Elige tu <del>Camino</del> Canino{" "}
+          Encuentra tu <del>Camino</del> Canino{" "}
           <span className={s.link_box}>
             <NavLink to={"/home"} className={s.ingresar}>
               Ingresar

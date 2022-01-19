@@ -91,7 +91,7 @@ export default function Details() {
           <div>
             <h4>Pertenece al grupo de razas</h4>
             <p translate="yes">
-              {thisDog && (thisDog.database ? "- " : thisDog.breed_group)}
+              {thisDog && (thisDog.database ? " - " : thisDog.breed_group)}
             </p>
           </div>
         </div>

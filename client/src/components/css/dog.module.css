@@ -6,17 +6,24 @@
   width: 70%;
 
   /* background: black; */
-  /* animation: home 0s ease 5s 1 normal;
-  animation-duration: 5s; */
 }
-/* @keyframes home {
+.animation_dogs {
+  animation-name: dogs;
+  animation-duration: 3s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+@keyframes dogs {
   0% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-} */
+}
 
 .dog {
   border-radius: 8px;
@@ -93,13 +100,21 @@
   height: 70%;
 }
 .temperament_box li {
+  font-size: 18px;
   text-align: center;
   color: #fff;
-  background-color: rgb(26, 22, 22);
+  background-image: linear-gradient(
+    to right top,
+    #0f550f,
+    #19410c,
+    #192e09,
+    #151c04,
+    #050700
+  );
   width: 40%;
-  padding: 2px 0px;
+  padding: 2px 1px;
   margin: 1px 3px 1px 3px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .weight_box {
   width: 40%;

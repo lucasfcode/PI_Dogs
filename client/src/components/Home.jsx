@@ -12,11 +12,18 @@ import Nav from "./Nav";
 
 export default function Home() {
   const reduxState = useSelector((state) => state);
+  //en principio el current será 1
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const render = 8;
+  //necesito  mostrar siempre 8 elementos del arreglo. Pero esto deve ir cambiando segun los indices que le indicaré a través de un slice.
+
+  //siempre se hará esta multiplicacion para saber cual será el ultimo indice a mostrar
   const lastPageIndex = currentPage * render;
+  //se restará la cantidad de objetos a renderizar para saber cuál es el primer indice a mostrar
   const firstPageIndex = lastPageIndex - render;
+  //Los 8 objetos a renderizar van a ser resultado de un slice de la totalidad de objetos
+  //devolverá un array con los indices definidos desde el primero y el ultimo, dependiendo de en qué pagina me encuentro (valor de currentPage)
   const currentRender = reduxState.filtered.slice(
     firstPageIndex,
     lastPageIndex
@@ -32,7 +39,7 @@ export default function Home() {
       clearTimeout(timeO);
     };
   };
-  //animation
+
   React.useEffect(() => {
     transFunction();
   }, []);

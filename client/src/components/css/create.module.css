@@ -236,11 +236,11 @@ textarea {
   }
   section {
     width: 100%;
-    padding: 0% 1%;
+    padding: -1% 1%;
   }
   .form {
     width: 100%;
-    padding: 5px 0px;
+    padding-bottom: 10px;
   }
   .form input,
   .form select,
@@ -257,5 +257,12 @@ textarea {
   }
   .error {
     font-size: 12px;
+  }
+  .submit_box input {
+    padding: 15px;
+    margin-bottom: 5px;
+  }
+  .submit_box {
+    padding-bottom: 5%;
   }
 }

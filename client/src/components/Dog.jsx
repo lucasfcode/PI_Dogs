@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import s from "./css/dog.module.css";
+import cssDog from "./css/dog.module.css";
 
 export default function Dog(props) {
   // declaro temperament porque los dogs creados me devuelven un array
@@ -9,33 +9,33 @@ export default function Dog(props) {
     : props.aDog.temperament;
 
   return (
-    <div className={`${s.dog}`}>
-      <div className={`${s.img_container}`}>
+    <div className={`${cssDog.dog} `}>
+      <div className={`${cssDog.img_container}`}>
         <img
           src={props.aDog.image.url || props.aDog.image}
           alt="Img_dog"
-          className={s.img_card}
+          className={cssDog.img_card}
         />
       </div>
-      <div className={s.name}>
+      <div className={cssDog.name}>
         <Link
           to={`/home/details/${props.aDog.id}`}
           onClick={() => window.scrollTo(0, 0)}
-          className={s.link}
+          className={cssDog.link}
         >
           <h2>{props.aDog.name}</h2>
         </Link>
       </div>
 
-      <div className={s.info}>
-        <div className={s.temperament_box}>
+      <div className={cssDog.info}>
+        <div className={cssDog.temperament_box}>
           <h3>Temperamento</h3>
           <ul>
             {temperament &&
               temperament.split(",").map((e, i) => <li key={i}>{e.trim()}</li>)}
           </ul>
         </div>
-        <div className={s.weight_box}>
+        <div className={cssDog.weight_box}>
           <h3>Peso</h3>
           <span>
             {props.aDog.database ? props.aDog.weight : props.aDog.weight.metric}{" "}

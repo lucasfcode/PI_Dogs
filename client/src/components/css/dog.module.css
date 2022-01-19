@@ -4,6 +4,7 @@
   flex-flow: wrap row;
   justify-content: space-evenly;
   width: 70%;
+
   /* background: black; */
   /* animation: home 0s ease 5s 1 normal;
   animation-duration: 5s; */
@@ -102,4 +103,32 @@
 }
 .weight_box {
   width: 40%;
+}
+
+@media (max-width: 700px) {
+  .dogs_container {
+    justify-content: center;
+    width: 100%;
+  }
+  .dog {
+    font-size: 13px;
+    width: 350px;
+  }
+}
+@media (max-width: 400px) {
+  .dog {
+    font-size: 12px;
+    width: 250px;
+  }
+  .img_container {
+    width: 100%;
+  }
+  .name {
+    width: 100%;
+    padding: 10px;
+    height: fit-content;
+  }
+  .temperament_box li {
+    width: 100%;
+  }
 }

@@ -1,6 +1,6 @@
 .home {
   opacity: 0;
-
+  transition-timing-function: ease-in;
   transition: 0.8s 0.1s linear;
 
   background: #e0e0e0;
@@ -55,4 +55,20 @@
 }
 .opacity {
   opacity: 1;
+}
+@media (max-width: 700px) {
+  .home {
+    flex-wrap: wrap-reverse;
+  }
+}
+@media (max-width: 450px) {
+  .pages ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+  }
+  .pages ul li {
+    font-size: 16px;
+    width: 5%;
+  }
 }

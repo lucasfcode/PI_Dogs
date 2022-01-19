@@ -1,5 +1,5 @@
 .searchbar_box {
-  width: 20%;
+  width: fit-content;
   padding: 10px;
   border-radius: 8px;
   background-color: #ecf0f3;
@@ -33,4 +33,35 @@
 }
 .btn:active {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* tablet */
+@media (min-width: 550px) and (max-width: 1000px) {
+  .searchbar_box {
+    border-radius: 4px;
+  }
+  .input_1 {
+    padding: 8px;
+  }
+  .btn {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 280px) and (max-width: 550px) {
+  .searchbar_box {
+    width: 100%;
+    padding: 5px 2px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .input_1 {
+    padding: 5px;
+    border: none;
+    width: 70%;
+  }
+  .btn {
+    padding: 5px;
+    border: 0.001px solid rgba(0, 0, 0, 0.418);
+  }
 }

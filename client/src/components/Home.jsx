@@ -22,45 +22,50 @@ export default function Home() {
     lastPageIndex
   );
   const [anim, setAnim] = React.useState(false);
-  React.useEffect(() => {
+  const transFunction = () => {
     let timeO = setTimeout(() => {
-      setAnim((anim) => !anim);
+      setAnim((anim) => true);
       timeO = null;
     }, 10);
 
     return () => {
       clearTimeout(timeO);
     };
+  };
+  //animation
+  React.useEffect(() => {
+    transFunction();
   }, []);
 
   return (
-    <div className={`${anim && sHome.opacity} ${sHome.home} `}>
+    <React.Fragment>
       <Nav setCurrentPage={setCurrentPage} />
-
-      <Pages
-        setCurrentPage={setCurrentPage}
-        allDogs={reduxState.filtered}
-        render={render}
-        currentPage={currentPage}
-      />
-      {
-        <div className={`${dogStyle.dogs_container} `}>
-          {currentRender.length ? (
-            currentRender.map((e) => {
-              return <Dog aDog={e} key={e.id} id={e.id} />;
-            })
-          ) : (
-            <NotFound currentRender={currentRender} />
-          )}
-        </div>
-      }
-      <Filters setCurrentPage={setCurrentPage} />
-      <Pages
-        setCurrentPage={setCurrentPage}
-        allDogs={reduxState.filtered}
-        render={render}
-        currentPage={currentPage}
-      />
-    </div>
+      <div className={` ${anim && sHome.opacity} ${sHome.home} `}>
+        <Pages
+          setCurrentPage={setCurrentPage}
+          allDogs={reduxState.filtered}
+          render={render}
+          currentPage={currentPage}
+        />
+        {
+          <div className={`${dogStyle.dogs_container} `}>
+            {currentRender.length ? (
+              currentRender.map((e) => {
+                return <Dog aDog={e} key={e.id} id={e.id} />;
+              })
+            ) : (
+              <NotFound currentRender={currentRender} />
+            )}
+          </div>
+        }
+        <Filters setCurrentPage={setCurrentPage} />
+        <Pages
+          setCurrentPage={setCurrentPage}
+          allDogs={reduxState.filtered}
+          render={render}
+          currentPage={currentPage}
+        />
+      </div>
+    </React.Fragment>
   );
 }

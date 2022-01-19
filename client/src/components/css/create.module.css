@@ -229,3 +229,33 @@ textarea {
   padding: 4%;
   cursor: pointer;
 }
+@media (max-width: 500px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  section {
+    width: 100%;
+    padding: 0% 1%;
+  }
+  .form {
+    width: 100%;
+    padding: 5px 0px;
+  }
+  .form input,
+  .form select,
+  .image_label input {
+    padding: 7px;
+  }
+  .img_box {
+    padding: 0%;
+  }
+  .arrow {
+    top: 1%;
+    left: 0%;
+    width: 12%;
+  }
+  .error {
+    font-size: 12px;
+  }
+}

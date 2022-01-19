@@ -9,9 +9,22 @@ export default function Details() {
   const dogs = useSelector((state) => state.dogs);
   let { dogId } = useParams();
   const [pop, setPop] = React.useState(false);
+  const [anim, setAnim] = React.useState(false);
   const open = () => {
     setPop(!pop);
   };
+  // transition effect
+  React.useEffect(() => {
+    let timeO = setTimeout(() => {
+      setAnim((anim) => !anim);
+      timeO = null;
+    }, 10);
+
+    return () => {
+      clearTimeout(timeO);
+    };
+  }, []);
+
   let navigate = useNavigate();
 
   let thisDog = dogs.find((d) => d.id.toString() === dogId.toString());
@@ -29,7 +42,7 @@ export default function Details() {
   const back = () => navigate(-1);
 
   return (
-    <div className={s.main_box}>
+    <div className={`${s.main_box} ${anim && s.opacity}`}>
       <div onClick={back} className={s.arrow}>
         <img src={arrow} alt="arrow.img" />
       </div>

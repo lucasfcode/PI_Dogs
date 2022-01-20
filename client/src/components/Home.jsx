@@ -39,9 +39,12 @@ export default function Home() {
       clearTimeout(timeO);
     };
   };
+  //estado de transicion de dogs-container
+  const [transContainer, setTransContainer] = React.useState(true);
 
   React.useEffect(() => {
     transFunction();
+    // setTransContainer(true);
   }, []);
 
   return (
@@ -49,16 +52,24 @@ export default function Home() {
       <Nav setCurrentPage={setCurrentPage} />
       <div className={` ${anim && sHome.opacity} ${sHome.home} `}>
         <Pages
+          setTransContainer={setTransContainer}
           setCurrentPage={setCurrentPage}
           allDogs={reduxState.filtered}
           render={render}
           currentPage={currentPage}
         />
         {
-          <div className={`${dogStyle.dogs_container} `}>
+          <div className={`${dogStyle.dogs_container}`}>
             {currentRender.length ? (
               currentRender.map((e) => {
-                return <Dog aDog={e} key={e.id} id={e.id} />;
+                return (
+                  <Dog
+                    aDog={e}
+                    key={e.id}
+                    id={e.id}
+                    transContainer={transContainer}
+                  />
+                );
               })
             ) : (
               <NotFound currentRender={currentRender} />
@@ -67,6 +78,7 @@ export default function Home() {
         }
         <Filters setCurrentPage={setCurrentPage} />
         <Pages
+          setTransContainer={setTransContainer}
           setCurrentPage={setCurrentPage}
           allDogs={reduxState.filtered}
           render={render}

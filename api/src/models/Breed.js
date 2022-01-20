@@ -23,11 +23,11 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       height: {
-        type: DataTypes.JSON,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       weight: {
-        type: DataTypes.JSON,
+        type: DataTypes.TEXT,
       },
       yearsOfLife: {
         type: DataTypes.STRING,

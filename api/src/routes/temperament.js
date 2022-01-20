@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(TemperamentsDB);
   } catch (err) {
     console.log(err);
+    //no enviar
     res.status(404).send("Hubo un error", err);
   }
 });

@@ -5,7 +5,7 @@ const { YOUR_API_KEY } = process.env;
 const { conn, Breed, Temperament, BreedTemp } = require("../db.js");
 //GET https://api.thedogapi.com/v1/breeds
 
-/* GET home page. */
+/*------------------------ GET home page.--------------------- */
 router.get("/", (req, res) => {
   //en principio busco por name en la api y en db y devuelvo todo
   const { name } = req.query;
@@ -49,6 +49,7 @@ router.get("/", (req, res) => {
       })
       .catch((err) => {
         console.log(err);
+        //no es recomendable enviar el error
         res.status(404).send(err);
       });
   }
@@ -81,12 +82,22 @@ router.get("/:idRaza", async (req, res) => {
 //POSTT
 router.post("/", async (req, res) => {
   try {
-    const { name, height, weight, yearsOfLife, image, temperament } = req.body;
+    const {
+      name,
+      height,
+      weight,
+      yearsOfLife,
+      image,
+      temperament,
+      description,
+    } = req.body;
     console.log("Objeto recibico en el back", req.body);
+
     let newDog = await Breed.findOrCreate({
       where: {
         image,
         name,
+        description,
         height,
         weight,
         yearsOfLife,
@@ -96,12 +107,14 @@ router.post("/", async (req, res) => {
     let tempDB = await Temperament.findAll({
       where: { name: temperament },
     });
-
+    // console.log("temps coincidencia", tempDB);
+    // console.log("New dog por crear back", newDog[0]);
     await newDog[0].setTemperaments(tempDB);
 
-    res.status(202).json(newDog);
+    res.status(202).json({ created: newDog, temperament: tempDB });
   } catch (err) {
     console.log(err);
+    //no enviar error
     res.status(404).send(err);
   }
 });

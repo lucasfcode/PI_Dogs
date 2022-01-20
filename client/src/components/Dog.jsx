@@ -9,7 +9,7 @@ export default function Dog(props) {
     : props.aDog.temperament;
 
   return (
-    <div className={`${cssDog.dog} `}>
+    <div className={`${cssDog.dog}  ${props.transContainer && cssDog.opacity}`}>
       <div className={`${cssDog.img_container}`}>
         <img
           src={props.aDog.image.url || props.aDog.image}

@@ -118,5 +118,24 @@ router.post("/", async (req, res) => {
     res.status(404).send(err);
   }
 });
+/* ------------PuT------------ */
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    let toEdit = await Breed.findByPk(id);
+    //edito varias propiedades a la vez
+    toEdit.update({
+      ...toEdit,
+      ...req.body,
+    });
+
+    await toEdit.save();
+
+    res.json(toEdit);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

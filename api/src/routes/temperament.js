@@ -31,17 +31,16 @@ router.get("/", async (req, res) => {
     res.status(404).send("Hubo un error", err);
   }
 });
-router.post("/add", async (req, res, next) => {
-  const { name } = req.body;
-  try {
-    const newTemp = await Temperament.findOrCreate({
-      where: {
-        name: name,
-      },
-    });
-    res.status(200).send("Created successfully");
-  } catch (errs) {
-    next(errs);
-  }
+
+router.post("/add/:name", async (req, res, next) => {
+  const { name } = req.params;
+
+  const newTemp = Temperament.findOrCreate({
+    where: {
+      name: name,
+    },
+  });
+
+  newTemp.then((res) => res.status(200).send(res)).catch((err) => next(err));
 });
 module.exports = router;

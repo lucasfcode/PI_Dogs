@@ -3,6 +3,7 @@ var router = express.Router();
 const axios = require("axios");
 const { YOUR_API_KEY } = process.env;
 const { conn, Breed, Temperament, BreedTemp } = require("../db.js");
+const req = require("express/lib/request");
 //GET https://api.thedogapi.com/v1/breeds
 
 /*------------------------ GET home page.--------------------- */
@@ -91,7 +92,7 @@ router.post("/", async (req, res) => {
       temperament,
       description,
     } = req.body;
-    console.log("Objeto recibico en el back", req.body);
+    // console.log("Objeto recibico en el back", req.body);
 
     let newDog = await Breed.findOrCreate({
       where: {
@@ -118,21 +119,45 @@ router.post("/", async (req, res) => {
     res.status(404).send(err);
   }
 });
-/* ------------PuT------------ */
+/* ------------PUT------------ */
 router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
-
+  const { name, height, weight, yearsOfLife, image, description, temperament } =
+    req.body;
+  console.log("temperamentos recibidos", temperament);
   try {
     let toEdit = await Breed.findByPk(id);
+    //encuentro y seteo los temperamentos
+    let tempDB = await Temperament.findAll({
+      where: { name: temperament },
+    });
+
     //edito varias propiedades a la vez
     toEdit.update({
       ...toEdit,
-      ...req.body,
+      name,
+      height,
+      weight,
+      yearsOfLife,
+      image,
+      description,
     });
-
+    //es imprescindible setear temps luego de actualizar los datos idk why
+    await toEdit.setTemperaments(tempDB);
     await toEdit.save();
 
     res.json(toEdit);
+  } catch (err) {
+    next(err);
+  }
+});
+/* ----------DELETE--------------- */
+router.delete("/clear/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const thisDog = await Breed.findByPk(id);
+    const deleted = await thisDog.destroy();
+    res.json("Dog deleted successfully");
   } catch (err) {
     next(err);
   }

@@ -9,6 +9,7 @@ import NotFound from "./NotFound";
 // import { getAllDogs } from "../redux/actions";
 import { Filters } from "./Filters";
 import Nav from "./Nav";
+import Footer from "./Footer";
 
 export default function Home() {
   const reduxState = useSelector((state) => state);
@@ -85,6 +86,7 @@ export default function Home() {
           currentPage={currentPage}
         />
       </div>
+      <Footer />
     </React.Fragment>
   );
 }

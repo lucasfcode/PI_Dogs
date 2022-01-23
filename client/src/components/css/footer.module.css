@@ -1,0 +1,22 @@
+.main {
+  width: 100%;
+  background: #222;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact {
+  /* background: rgba(255, 255, 255, 0.589); */
+  color: #fff;
+  font-size: 18px;
+  padding: 15px 0px;
+  width: 100%;
+}
+.contact a {
+  text-decoration: none;
+  color: rgb(178, 169, 230);
+  font-size: 17px;
+  display: inline-block;
+  padding: 10px;
+}

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createDog, getAllDogs } from "../redux/actions";
 import arrow from "../images/arrow.png";
+import Footer from "./Footer";
 
 export default function CreateDog() {
   const dispatcher = useDispatch();
@@ -448,6 +449,7 @@ export default function CreateDog() {
           </div>
         </form>
       </section>
+      <Footer />
     </React.Fragment>
   );
 }

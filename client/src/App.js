@@ -7,7 +7,6 @@ import { getAllDogs, getTemperaments } from "./redux/actions";
 import React from "react";
 import { useDispatch } from "react-redux";
 import Details from "./components/Details";
-import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();

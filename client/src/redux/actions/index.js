@@ -15,9 +15,10 @@ export const UPDATE_DOG = "UPDATE_DOG";
 export const DELETE_DOG = "DELETE_DOG";
 
 export const getAllDogs = (dispatch) => {
-  return fetch(`http://localhost:3001/dogs`)
-    .then((response) => response.json())
+  return axios(`/dogs`)
+    .then((response) => response.data)
     .then((json) => {
+      console.log("axios valor from all dogs", axios.defaults.baseURL);
       dispatch({
         type: GET_ALL_DOGS,
         payload: json,
@@ -27,8 +28,8 @@ export const getAllDogs = (dispatch) => {
 };
 
 export const getTemperaments = (dispatch) => {
-  return fetch(`http://localhost:3001/temperament`)
-    .then((response) => response.json())
+  return axios(`/temperament`)
+    .then((response) => response.data)
     .then((json) => {
       dispatch({
         type: GET_TEMPERAMENT,
@@ -39,8 +40,8 @@ export const getTemperaments = (dispatch) => {
 
 export const getSearchedDogs = (toSearch) => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/dogs/?name=${toSearch}`)
-      .then((response) => response.json())
+    return axios(`/dogs/?name=${toSearch}`)
+      .then((response) => response.data)
       .then((json) => {
         // console.log(json);
         dispatch({
@@ -117,7 +118,7 @@ export const createDog = (object) => {
   };
   // console.log("setBody", setBody);
   axios
-    .post("http://localhost:3001/dogs", setBody)
+    .post("/dogs", setBody)
     .then((res) => res.data)
     .then((data) => console.log("creado", data))
     .catch((err) => console.log("error en axios", err));
@@ -131,7 +132,7 @@ export const updateDog = (form, id) => {
     yearsOfLife: `${form.yearsOfLife.min} - ${form.yearsOfLife.max}`,
   };
   axios
-    .put(`http://localhost:3001/dogs/${id}`, updated)
+    .put(`/dogs/${id}`, updated)
     .then((res) => res.data)
     .then((res) => console.log("updated", res))
     .catch((e) => console.log("error en updated", e));
@@ -141,8 +142,9 @@ export const updateDog = (form, id) => {
   };
 };
 export const deleteDog = (id, dispatch) => {
+  ///j
   axios
-    .delete(`http://localhost:3001/dogs/clear/${id}`)
+    .delete(`/dogs/clear/${id}`)
     .then((res) => {
       console.log(res.data);
       dispatch({

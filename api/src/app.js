@@ -9,6 +9,8 @@ require("./db.js");
 const server = express();
 
 server.name = "API";
+const cors = require("cors");
+server.use(cors());
 
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
@@ -17,7 +19,7 @@ server.use(morgan("dev"));
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from. * -> autoriza los requests de cualquier puerto
 
-  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Credentials", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

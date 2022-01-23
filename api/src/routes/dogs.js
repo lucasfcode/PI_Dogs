@@ -43,6 +43,7 @@ router.get("/", (req, res) => {
       }),
     ])
       .then((r) => {
+        console.log("rrrrrrrrrrrrrrrr"), r;
         let apiDogs = r[0].data;
         let dbDogs = r[1];
         // let allDogs = dbDogs.concat(apiDogs);

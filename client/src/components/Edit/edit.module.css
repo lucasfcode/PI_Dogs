@@ -1,0 +1,274 @@
+:root {
+  --color_one: #474f0e;
+  --color_black: #2c1c00;
+  --color_pink: #ff6fb5;
+  --color_cream: #ffc082;
+  --color_yellow: #ffffa6;
+  --color_white: #b9c9d4;
+}
+
+.main {
+  padding: 8px;
+  background: rgba(26, 3, 3, 0.13);
+  backdrop-filter: blur(15px);
+  position: absolute;
+  width: 100%;
+  min-height: 130vh;
+  height: fit-content;
+  margin: -18px 0px;
+  z-index: 456;
+}
+.close {
+  position: absolute;
+  /* background-color: black; */
+  width: 100%;
+  color: #fff;
+
+  /* left: 67%;
+
+  top: 0.6%; */
+  display: flex;
+  justify-content: center;
+  padding-left: 17.8%;
+  height: fit-content;
+  cursor: pointer;
+}
+.close span {
+  border-radius: 15px;
+  font-size: 40px;
+  display: inline-block;
+  width: 45px;
+  background-color: rgb(80, 51, 51);
+}
+.close span:hover {
+  background-color: rgba(243, 229, 229, 0.452);
+  color: black;
+}
+.form {
+  border-radius: 10px;
+  color: #fff;
+  background-image: linear-gradient(
+    to right top,
+    #0f550f,
+    #19410c,
+    #192e09,
+    #151c04,
+    #050700
+  );
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px;
+  min-height: 70vh;
+  width: 500px;
+  margin: 0 auto;
+}
+.error {
+  color: rgb(240, 220, 220);
+
+  animation-name: error;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name: error;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+@-moz-keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes error {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.containers,
+.temperament_box,
+.submit_box {
+  width: 100%;
+  padding: 5px;
+  margin: 2px;
+}
+.raza_label {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.form h4 {
+  width: 100%;
+  background: #c5c5b0fa;
+  color: var(--color_black);
+  border-radius: 4px;
+  padding: 3px 0px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+input {
+  padding: 8px;
+  border-radius: 8px;
+}
+.min_max {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  padding-bottom: 10px;
+}
+.min_max input {
+  width: 80px;
+}
+
+.temperament_box select {
+  width: 100%;
+  padding: 5px;
+}
+.selected_temps_box {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+.selected_temps_box span {
+  width: 25%;
+  margin: 5px;
+  background: var(--color_black);
+  padding: 2px 0px;
+  border-radius: 5px;
+}
+.description_label {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+}
+.textarea {
+  width: 100%;
+}
+
+/* From cssbuttons.io by @adamgiebl */
+.submit_box input {
+  cursor: pointer;
+  --green: #1bfd9c;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(
+    to right,
+    rgba(27, 253, 156, 0.1) 1%,
+    transparent 40%,
+    transparent 60%,
+    rgba(27, 253, 156, 0.1) 100%
+  );
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4),
+    0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+.submit_box input:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(226, 248, 238, 0.849),
+    0 0 99px 3px rgba(27, 253, 156, 0.2);
+}
+/* --------Querys------------- */
+
+@media (max-width: 1080px) {
+  .close {
+    left: 83%;
+    top: 0.5%;
+    color: white;
+  }
+}
+@media (max-width: 500px) {
+  .main {
+    width: 100%;
+    padding: 1% 0%;
+    min-height: 100%;
+  }
+
+  .form {
+    width: 98%;
+    margin: 0 auto;
+    padding: 1%;
+  }
+  .form .name,
+  .form h4 {
+    font-size: 16px;
+  }
+  .close {
+    background-color: rgb(24, 22, 22);
+    color: #fff;
+
+    font-size: 27px;
+    left: 0%;
+    width: 11%;
+    text-align: center;
+    position: fixed;
+
+    top: 0.5%;
+    height: fit-content;
+    cursor: pointer;
+  }
+  input {
+    padding: 4px;
+    border-radius: 8px;
+  }
+  .description_label {
+    display: flex;
+    width: 90%;
+
+    margin: 0 auto;
+  }
+
+  .min_max input {
+    width: 30%;
+  }
+
+  /* -------ul-------- */
+  .selected_temps_box {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+  }
+  .selected_temps_box span {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    background: var(--color_black);
+    padding: 2px 0px;
+    border-radius: 5px;
+  }
+}

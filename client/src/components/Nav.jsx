@@ -1,15 +1,16 @@
 import React from "react";
 import SearchBar from "./Search";
 import s from "./css/nav.module.css";
+import logo from "../images/logoDogs.png";
 
 export default function Nav({ setCurrentPage }) {
   return (
     <nav className={s.main}>
-      <h1 className={s.main_title}>
+      <div className={s.main_title}>
         <a href="/home" className={s.NavLInk}>
-          Encuentra tu Canino
+          <img src={logo} alt="logo" />
         </a>
-      </h1>
+      </div>
 
       <SearchBar setCurrentPage={setCurrentPage} />
     </nav>

@@ -10,12 +10,25 @@ body {
   scroll-behavior: smooth;
 }
 .App {
+  margin: 0 auto;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   flex-flow: row wrap;
   font-family: Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif;
   text-size-adjust: 100%;
+  max-width: 1600px;
+}
+/* ------------query-------------- 
+
+*/
+@media (max-width: 500px) {
+  body {
+    background-size: 250%;
+
+    background-position: left;
+    min-height: 100vh;
+  }
 }

@@ -11,6 +11,8 @@ import {
   GET_ALL,
   ORDER_BY_NAME,
   ORDER_BY_WEIGHT,
+  UPDATE_DOG,
+  DELETE_DOG,
 } from "../actions";
 import {} from "../actions";
 import { orderNameFn, orderWeightFn } from "./controllers";
@@ -48,7 +50,14 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         filtered: state.dogs,
       };
-
+    case UPDATE_DOG:
+      return {
+        ...state,
+      };
+    case DELETE_DOG:
+      return {
+        ...state,
+      };
     case GET_ONLY_API:
       let fromApi = state.dogs.filter((dog) => !dog.database);
       // console.log("se ejecuto reducer GET_API");
@@ -68,11 +77,13 @@ export default function rootReducer(state = initialState, action) {
         filtered: action.payload,
       };
     case ORDER_BY_NAME:
+      //no necesito ningun payload
       return {
         ...state,
         filtered: orderNameFn(state.filtered),
       };
     case ORDER_BY_WEIGHT:
+      //no necesito ningun payload
       return {
         ...state,
         filtered: orderWeightFn(state.filtered),
@@ -87,12 +98,10 @@ export default function rootReducer(state = initialState, action) {
           : conditionals === "api"
           ? state.dogs.filter((dog) => !dog.database)
           : state.dogs.filter((dog) => (dog.database ? true : false));
-      // console.log("dogsWidthconditional tamano", dogsWithConditional.length);
-      //filtrado de todos los dogs
+
+      //filtrado por los temps recibidos en selected
       const filter = dogsWithConditional.filter((dog) => {
         //dogs.temperament--> string
-        //cada elemento del payload debe existir en las temps del dog. Es un concicional &&
-
         //guardo los temperamentos del perro actual analizado (dog) en una variable, dependiendo si es Db o de la api
         //los temperamentos del dog actual me van a servir para validar si coinciden con los selected
 

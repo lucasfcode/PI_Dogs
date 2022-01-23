@@ -1,5 +1,5 @@
 .searchbar_box {
-  width: fit-content;
+  width: 350px;
   padding: 10px;
   border-radius: 8px;
   background-color: #ecf0f3;
@@ -7,7 +7,7 @@
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 .input_1 {
@@ -19,6 +19,7 @@
   border-radius: 20px;
   font-weight: bold;
   outline: none;
+  width: 65%;
 }
 
 .btn {
@@ -36,32 +37,33 @@
 }
 
 /* tablet */
-@media (min-width: 550px) and (max-width: 1000px) {
+@media (max-width: 1024px) {
   .searchbar_box {
-    border-radius: 4px;
+    width: 280px;
   }
   .input_1 {
-    padding: 8px;
+    padding: 6px;
   }
   .btn {
-    padding: 8px;
+    padding: 5px;
   }
 }
 
-@media (min-width: 280px) and (max-width: 550px) {
+@media (max-width: 550px) {
   .searchbar_box {
     width: 100%;
-    padding: 5px 2px;
+    padding: 10px 2px;
+    justify-content: space-evenly;
+    align-items: center;
     border-radius: 4px;
     margin-top: 2px;
   }
   .input_1 {
-    padding: 5px;
-    border: none;
-    width: 70%;
+    padding: 6px;
+    border: solid rgb(165, 137, 137);
   }
   .btn {
     padding: 5px;
-    border: 0.001px solid rgba(0, 0, 0, 0.418);
+    border: solid rgb(165, 137, 137);
   }
 }

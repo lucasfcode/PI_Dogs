@@ -1,11 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import s from "./css/details.module.css";
 import { useNavigate, useParams } from "react-router";
 import Modal from "./Modal";
 import arrow from "../images/arrow.png";
+import optionIcon from "../images/options-icon.png";
+import Edit from "./Edit/Edit";
+import { deleteDog } from "../redux/actions";
 
 export default function Details() {
+  const dispatcher = useDispatch();
   const dogs = useSelector((state) => state.dogs);
   let { dogId } = useParams();
   const [pop, setPop] = React.useState(false);
@@ -13,6 +17,8 @@ export default function Details() {
   const open = () => {
     setPop(!pop);
   };
+  const [option, setOption] = React.useState(false);
+  const [update, setUpdate] = React.useState(false);
   // transition effect
   React.useEffect(() => {
     let timeO = setTimeout(() => {
@@ -40,12 +46,35 @@ export default function Details() {
   let weight =
     thisDog && (thisDog.database ? thisDog.weight : thisDog.weight.metric);
   const back = () => navigate(-1);
-
+  const showOptions = () => {
+    setOption((prev) => !prev);
+  };
+  //setea el estado para mostrar el form update
+  const showUpdate = () => {
+    setUpdate(true);
+  };
+  const removeDog = () => {
+    if (window.confirm("Si confirma, su perro se eliminará")) {
+      deleteDog(dogId, dispatcher);
+      navigate("/home");
+      window.location.reload(true);
+    }
+  };
   return (
     <div className={`${s.main_box} ${anim && s.opacity}`}>
-      <div onClick={back} className={s.arrow}>
-        <img src={arrow} alt="arrow.img" />
+      <div className={s.arrow}>
+        <img onClick={back} src={arrow} alt="arrow.img" />
       </div>
+
+      {update && (
+        <Edit
+          id={dogId}
+          thisDog={thisDog}
+          temps={temperament}
+          setUpdate={setUpdate}
+          setOption={setOption}
+        />
+      )}
       <Modal
         pop={pop}
         setPop={setPop}
@@ -53,6 +82,25 @@ export default function Details() {
       />
 
       <div className={s.details_box}>
+        {/* ----------options box----------- */}
+        {thisDog && thisDog.database ? (
+          <div className={s.options}>
+            <img onClick={showOptions} src={optionIcon} alt="option-icon" />
+          </div>
+        ) : null}
+        {/* options div */}
+        {thisDog && thisDog.database
+          ? option && (
+              <div className={s.options_div}>
+                <ul>
+                  <li onClick={showUpdate}>Actualizar</li>
+                  <li onClick={removeDog}>Eliminar</li>
+                </ul>
+              </div>
+            )
+          : null}
+
+        {/* -----------features box----------- */}
         <div className={s.features_box}>
           <img
             onClick={open}

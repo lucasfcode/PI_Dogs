@@ -12,7 +12,7 @@ export default function CreateDog() {
   );
   React.useEffect(() => {
     return () => {
-      console.log("ejecutado use EFFECT de create desmontado");
+      // console.log("ejecutado use EFFECT de create desmontado");
       getAllDogs(dispatcher);
     };
   }, [dispatcher]);
@@ -41,7 +41,7 @@ export default function CreateDog() {
     // validar name
 
     if (form.hasOwnProperty("name")) {
-      console.log("ENTRO AL IF DE NAME");
+      // console.log("ENTRO AL IF DE NAME");
       if (form.name.length === 0)
         check.name = "Debes completar el campo 'Raza' ";
       else if (form.name.trim().length < 1)
@@ -49,7 +49,7 @@ export default function CreateDog() {
       else if (form.name.length < 3)
         check.name = "El nombre de tu raza debe contener mas de 3 caracteres";
       else if (!form.name.split("").every((l) => /[a-zñéóúíá\s]/i.test(l))) {
-        console.log("el valor contiene algo diferente a un string", form.name);
+        // console.log("el valor contiene algo diferente a un string", form.name);
         check.name =
           "No se admiten valores diferentes a texto en el campo de Raza";
       } else {
@@ -59,7 +59,7 @@ export default function CreateDog() {
     }
 
     //validar altura
-    console.log("recibido en validator Fn", form);
+    // console.log("recibido en validator Fn", form);
 
     if (form.hasOwnProperty("height")) {
       if (!form.height.min || !form.height.max)
@@ -156,7 +156,7 @@ export default function CreateDog() {
         });
   };
   const onWeight = (v) => {
-    console.log("Peso id", v.target.id);
+    // console.log("Peso id", v.target.id);
     v.target.id === "min_weight"
       ? setformState((prev) => {
           return { ...prev, weight: { ...prev.weight, min: v.target.value } };

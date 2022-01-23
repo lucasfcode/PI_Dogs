@@ -6,6 +6,7 @@
   width: 70%;
   transition-timing-function: ease-in;
   /* transition: 0.8s 0.1s linear; */
+  overflow-y: auto;
   transition-delay: 0.5s;
 
   /* background: black; */
@@ -94,12 +95,12 @@
   text-align: center;
   color: #fff;
   background-image: linear-gradient(
-    to right top,
-    #0f550f,
-    #19410c,
-    #192e09,
-    #151c04,
-    #050700
+    49deg,
+    #27a082,
+    #1a5804,
+    #135316,
+    #27a082,
+    #1a5804
   );
   width: 40%;
   padding: 2px 1px;

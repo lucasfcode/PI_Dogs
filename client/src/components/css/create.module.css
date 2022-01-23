@@ -229,7 +229,11 @@ textarea {
   padding: 4%;
   cursor: pointer;
 }
-@media (max-width: 500px) {
+.submit_box input:hover {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+/* ------------Querys------------- */
+@media (max-width: 550px) {
   .title {
     font-size: 20px;
     margin-bottom: 5px;
@@ -262,7 +266,22 @@ textarea {
     padding: 15px;
     margin-bottom: 5px;
   }
+
   .submit_box {
     padding-bottom: 5%;
+  }
+  .selected_temps_box {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+  }
+  .selected_temps_box span {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    background: rgba(0, 0, 0, 0.329);
+    padding: 2px 0px;
+    border-radius: 5px;
   }
 }

@@ -63,7 +63,7 @@
     flex-wrap: wrap-reverse;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .pages ul {
     display: flex;
     justify-content: space-evenly;

@@ -1,3 +1,12 @@
+:root {
+  --color_one: #474f0e;
+  --color_black: #2c1c00;
+  --color_pink: #ff6fb5;
+  --color_cream: #ffc082;
+  --color_yellow: #ffffa6;
+  --color_white: #b9c9d4;
+}
+
 .main_box {
   padding: 20px 0px;
   width: 100%;
@@ -11,14 +20,17 @@
     #aab5c0,
     #ecf0f3
   ); */
+  animation: animateBg 28s ease infinite;
   background-image: linear-gradient(
-    to right top,
-    #0f550f,
-    #19410c,
-    #192e09,
-    #151c04,
-    #050700
+    49deg,
+    #27a082,
+    #1a5804,
+    #135316,
+    #27a082,
+    #151c04
   );
+  background-size: 400% 100%;
+
   opacity: 0;
 
   transition: 0.8s 0.1s linear;
@@ -29,19 +41,92 @@
   flex-flow: wrap;
   justify-content: space-around;
 }
+@keyframes animateBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
 .arrow {
   position: absolute;
-  left: 0;
-  top: 10px;
-  background-color: #05193700;
-  color: black;
-  border: none;
-  /* font-size: 80px; */
-  /* padding: 10px; */
-  width: 7%;
+  /* background: white; */
+  width: 100%;
+  z-index: 3;
+  top: 0;
+  display: flex;
+  /* flex-direction: column; */
+  padding: 0%;
+  justify-content: flex-start;
 }
+.arrow img {
+  width: 80px;
+}
+.options {
+  width: 100%;
+
+  position: absolute;
+
+  top: 0;
+  cursor: pointer;
+
+  /* height: 30px; */
+  /* background: white; */
+  /* padding: 3.2px 3.2px 0px 3.3px; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.options img {
+  width: 40px;
+  z-index: 444;
+}
+.options img:hover {
+  transition-duration: 1s;
+  transform: scale(1) rotate(-100deg);
+}
+.options_div {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.774);
+  backdrop-filter: blur(5px);
+  color: white;
+  width: 50%;
+  height: 200px;
+  z-index: 22;
+  border-radius: 15px 0px 15px 15px;
+  right: 6%;
+  top: 3.5%;
+}
+.options_div ul {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+
+  align-content: center;
+}
+.options_div ul li {
+  width: 100%;
+  border-radius: 8px;
+  align-self: center;
+  z-index: 2;
+  padding: 9% 0%;
+
+  cursor: pointer;
+}
+.options_div ul li:hover {
+  background-color: var(--color_white);
+  color: #333;
+}
+
 .details_box {
   display: flex;
+  position: relative;
   justify-content: center;
   flex-flow: wrap row;
   width: 50%;
@@ -64,12 +149,12 @@ img {
   border-radius: 10px;
   padding: 1% 0px;
   background-image: linear-gradient(
-    to right top,
-    #0f550f,
-    #19410c,
-    #192e09,
-    #151c04,
-    #050700
+    49deg,
+    #27a082,
+    #1a5804,
+    #135316,
+    #27a082,
+    #151c04
   );
   display: flex;
   justify-content: center;
@@ -96,12 +181,12 @@ img {
   width: 100%;
   padding: 10px 5px;
   background-image: linear-gradient(
-    to right top,
-    #0f550f,
-    #19410c,
-    #192e09,
-    #151c04,
-    #050700
+    49deg,
+    #27a082,
+    #1a5804,
+    #135316,
+    #27a082,
+    #151c04
   );
   display: flex;
   justify-content: center;
@@ -126,7 +211,7 @@ img {
 }
 .description_p {
   width: 89%;
-  padding: 5px;
+  padding: 2px;
   text-align: center;
   border-radius: 15px;
 }
@@ -134,17 +219,31 @@ img {
   opacity: 1;
 }
 
-@media (max-width: 450px) {
+/* --------querys---------- */
+@media (max-width: 1080px) {
+  .options img {
+    width: 35px;
+    margin-right: -3px;
+  }
+  .options_div {
+    top: 2%;
+    right: 7%;
+  }
+}
+@media (max-width: 550px) {
   .main_box {
-    padding: 5% 5%;
+    padding: 3% 0.3%;
+    width: 100%;
   }
   .details_box {
-    width: 90%;
-    padding: 15px 0px;
+    width: 96%;
+    padding-left: 0%;
+    padding-right: 0%;
   }
   .arrow {
     width: 50px;
-    top: -5px;
+    /* top: -5px; */
+    z-index: 255;
     left: -12px;
   }
   .name {
@@ -152,9 +251,47 @@ img {
     border-radius: 5px;
   }
   .features_box {
-    font-size: 12px;
+    font-size: 13px;
   }
   .features_box h2 {
     border-radius: 5px;
+    margin-top: -15px;
+    width: 100%;
+    padding: 1%;
+  }
+  .features_box div h4 {
+    width: 100%;
+  }
+  .features_box div p {
+    width: 100%;
+    text-align: center;
+  }
+  .arrow {
+    padding-top: 5px;
+  }
+  .arrow img {
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+
+  .options img {
+    width: 25px;
+    margin-top: 5px;
+    margin-right: -3px;
+  }
+  .options_div {
+    top: 2.5%;
+    right: 7%;
+  }
+}
+@media (max-width: 300px) {
+  .arrow img {
+    width: 45px;
+  }
+  .options_div {
+    width: 60%;
+    top: 3.2%;
+    right: 9%;
   }
 }

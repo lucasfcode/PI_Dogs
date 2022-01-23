@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   display: initial;
+  z-index: 99999;
 }
 .main div {
   width: 100%;
@@ -31,4 +32,10 @@
 }
 .display {
   display: none;
+}
+/* --------query-------- */
+@media (max-width: 550px) {
+  .main {
+    display: none;
+  }
 }

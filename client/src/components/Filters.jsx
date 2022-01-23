@@ -61,10 +61,10 @@ export function Filters({ setCurrentPage }) {
     let temp = event.target;
     let name = temp.name.toUpperCase();
     let checkCopy = [...checkedState];
-    //actualizo la copia del estado de checkboxs
+    //actualizo la copia del estado de checkboxs reasignando solo el valor cambiado
     checkCopy[temp.id] = checkedState[temp.id] === false ? true : false;
     setCheckedState(checkCopy);
-
+    //agrego  o quito el temp marcado a selected
     temp.checked
       ? setSelected((prev) => [...prev, name])
       : setSelected((prev) => prev.filter((e) => e !== name));
@@ -73,10 +73,9 @@ export function Filters({ setCurrentPage }) {
   //aplicar filtros
   const applyHandler = () => {
     //valor de lprimer select
+    //all refiere al estado controlador de todos, created , api
     let conditional = all;
     if (selected.length) {
-      //aplico los filtros anteriores (selected, order, api) para que filtered vuelva a recargar los dogs
-      //y que no queden residuos de algun filtro anterior
       // console.log(
       //   "por filtrar: dentro de applyHandler entro en el if ",
       //   selected

@@ -11,6 +11,8 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const CREATE_DOG = "CREATE_DOG";
 export const GET_ALL = " GET_ALL";
+export const UPDATE_DOG = "UPDATE_DOG";
+export const DELETE_DOG = "DELETE_DOG";
 
 export const getAllDogs = (dispatch) => {
   return fetch(`http://localhost:3001/dogs`)
@@ -59,6 +61,7 @@ export const filterByTemp = (conditionals, selected) => {
 };
 export const orderByName = (value) => {
   // console.log("se dispacho by Order");
+  //es indistinto que tenga value
   return {
     type: ORDER_BY_NAME,
     payload: value,
@@ -66,6 +69,7 @@ export const orderByName = (value) => {
 };
 export const orderByWeight = (value) => {
   // console.log("se dispacho orderByWeight", value);
+  //es indistinto que tenga value
   return {
     type: ORDER_BY_WEIGHT,
     payload: value,
@@ -117,4 +121,33 @@ export const createDog = (object) => {
     .then((res) => res.data)
     .then((data) => console.log("creado", data))
     .catch((err) => console.log("error en axios", err));
+};
+
+export const updateDog = (form, id) => {
+  let updated = {
+    ...form,
+    height: `${form.height.min} - ${form.height.max}`,
+    weight: `${form.weight.min} - ${form.weight.max}`,
+    yearsOfLife: `${form.yearsOfLife.min} - ${form.yearsOfLife.max}`,
+  };
+  axios
+    .put(`http://localhost:3001/dogs/${id}`, updated)
+    .then((res) => res.data)
+    .then((res) => console.log("updated", res))
+    .catch((e) => console.log("error en updated", e));
+
+  return {
+    type: UPDATE_DOG,
+  };
+};
+export const deleteDog = (id, dispatch) => {
+  axios
+    .delete(`http://localhost:3001/dogs/clear/${id}`)
+    .then((res) => {
+      console.log(res.data);
+      dispatch({
+        type: DELETE_DOG,
+      });
+    })
+    .catch((error) => console.log("error en delete", error));
 };

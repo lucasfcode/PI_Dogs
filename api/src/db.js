@@ -11,6 +11,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 //     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 //   }
 // );
+console.log("process.env", process.env.NODE_ENV);
 const sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({

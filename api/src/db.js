@@ -15,13 +15,12 @@ console.log("process.env", process.env.NODE_ENV);
 const sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: "dghslq174tseu",
+        database: DB_NAME,
         dialect: "postgres",
-        host: "ec2-3-226-165-74.compute-1.amazonaws.com",
+        host: DB_HOST,
         port: 5432,
-        username: "whgdomjekeydup",
-        password:
-          "0be4f3ba927810502b1ac724e82000b712fa31bdcd956f754c23d6c36f946d93",
+        username: DB_USER,
+        password: DB_PASSWORD,
         pool: {
           max: 3,
           min: 1,

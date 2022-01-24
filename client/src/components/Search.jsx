@@ -31,7 +31,6 @@ export default function SearchBar({ setCurrentPage }) {
         className={s.input_1}
         value={searching.state}
         onChange={(e) => onHandler(e)}
-        autoFocus
       />
       <button className={s.btn} onClick={(e) => handlerSubmit(e)}>
         Buscar

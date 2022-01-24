@@ -124,7 +124,7 @@
     width: 350px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .dog {
     font-size: 12px;
     width: 250px;
@@ -137,7 +137,7 @@
     padding: 10px;
     height: fit-content;
   }
-  .temperament_box li {
+  .temperament_box ul li {
     width: 100%;
   }
 }

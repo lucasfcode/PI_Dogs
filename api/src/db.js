@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-//Antes del deploy
+
 // const sequelize = new Sequelize(
 //   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`,
 //   {
@@ -11,10 +11,10 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 //     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 //   }
 // );
-let sequelize =
+const sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: "dogs",
+        database: DB_NAME,
         dialect: "postgres",
         host: DB_HOST,
         port: 5432,
@@ -40,7 +40,7 @@ let sequelize =
         native: false,
       });
 
-//lo de abajo vino por default
+//lo de abajo vino por defecto
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

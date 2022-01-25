@@ -264,10 +264,12 @@ img {
     border-radius: 5px;
   }
   .features_box {
-    font-size: 13px;
+    font-size: 15px;
     width: 90%;
   }
+
   .features_box h2 {
+    font-size: 18px;
     border-radius: 5px;
     margin-top: -15px;
     width: 100%;
@@ -276,6 +278,9 @@ img {
   .features_box div {
     height: 6%;
     padding: 1%;
+  }
+  .features_box div p {
+    font-size: 13px;
   }
   .features_box div h4 {
     width: 100%;

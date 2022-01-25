@@ -10,13 +10,6 @@ export default function Dog(props) {
 
   return (
     <div className={`${cssDog.dog}  ${props.transContainer && cssDog.opacity}`}>
-      <div className={`${cssDog.img_container}`}>
-        <img
-          src={props.aDog.image.url || props.aDog.image}
-          alt="Img_dog"
-          className={cssDog.img_card}
-        />
-      </div>
       <div className={cssDog.name}>
         <Link
           to={`/home/details/${props.aDog.id}`}
@@ -25,6 +18,13 @@ export default function Dog(props) {
         >
           <h2>{props.aDog.name}</h2>
         </Link>
+      </div>
+      <div className={`${cssDog.img_container}`}>
+        <img
+          src={props.aDog.image.url || props.aDog.image}
+          alt="Img_dog"
+          className={cssDog.img_card}
+        />
       </div>
 
       <div className={cssDog.info}>

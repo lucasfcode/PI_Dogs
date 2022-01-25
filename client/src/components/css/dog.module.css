@@ -47,12 +47,14 @@
   height: 200px;
   object-fit: cover;
   width: 100%;
+
   display: block;
   border-radius: 8px;
 }
 .name {
   height: 50%;
   width: 40%;
+  padding-top: 4px;
   /* border-radius: 50px; */
   display: flex;
   justify-content: center;
@@ -60,10 +62,24 @@
 }
 .link {
   text-decoration: none;
-  color: inherit;
-  border-bottom: solid 0.2px;
+
+  width: 98%;
+  color: rgb(235, 223, 203);
+  padding: 5px;
   box-shadow: rgba(26, 22, 22, 0.096) 0px 4px 6px;
+  background-image: linear-gradient(
+    49deg,
+    #27a082,
+    #1a5804,
+    #135316,
+    #27a082,
+    #1a5804
+  );
   border-radius: 4px;
+}
+.link:hover {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
 }
 .info {
   font-size: 1.2em;
@@ -88,7 +104,7 @@
   width: 95%;
   margin: auto;
   overflow: auto;
-  height: 70%;
+  height: 64%;
 }
 .temperament_box li {
   font-size: 18px;
@@ -102,7 +118,7 @@
     #27a082,
     #1a5804
   );
-  width: 40%;
+  width: 46%;
   padding: 2px 1px;
   margin: 1px 3px 1px 3px;
   border-radius: 4px;
@@ -126,7 +142,6 @@
 }
 @media (max-width: 550px) {
   .dog {
-    font-size: 12px;
     width: 300px;
   }
   .img_container {

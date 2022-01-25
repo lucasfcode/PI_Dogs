@@ -241,13 +241,13 @@ export default function Edit(props) {
   };
   return (
     <div className={eStyle.main}>
-      {/* ----------------X to close------------- */}
-      <div className={eStyle.close} onClick={() => onClose()}>
-        <span>X</span>
-      </div>
       <form onSubmit={(e) => onSubmit(e)} className={eStyle.form}>
         {/* {" ---------------Name--------------"} */}
         <div className={eStyle.containers}>
+          {/* ----------------X to close------------- */}
+          <div className={eStyle.close} onClick={() => onClose()}>
+            <span>X</span>
+          </div>
           <label value="Raza" className={eStyle.raza_label}>
             <h4>Raza </h4>
 

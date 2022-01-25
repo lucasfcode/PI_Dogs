@@ -10,26 +10,27 @@
 .main {
   padding: 8px;
   background: rgba(26, 3, 3, 0.13);
+
   backdrop-filter: blur(15px);
   position: absolute;
+  display: flex;
   width: 100%;
-  min-height: 130vh;
+
   height: fit-content;
   margin: -18px 0px;
   z-index: 456;
 }
+.containers {
+  position: relative;
+}
 .close {
+  /* background-color: rgb(255, 251, 251); */
+
+  width: fit-content;
   position: absolute;
-  /* background-color: black; */
-  width: 100%;
+  top: -18px;
+  left: 105%;
   color: #fff;
-
-  /* left: 67%;
-
-  top: 0.6%; */
-  display: flex;
-  justify-content: center;
-  padding-left: 17.8%;
   height: fit-content;
   cursor: pointer;
 }
@@ -228,7 +229,6 @@ input {
     font-size: 16px;
   }
   .close {
-    background-color: rgb(24, 22, 22);
     color: #fff;
 
     font-size: 27px;
@@ -270,5 +270,33 @@ input {
     background: var(--color_black);
     padding: 2px 0px;
     border-radius: 5px;
+  }
+}
+/* ---------querys----------- */
+@media (max-width: 1080px) {
+  .close {
+    left: 520px;
+    top: -20px;
+  }
+}
+@media (max-width: 550px) {
+  .close {
+    left: 1%;
+    top: 1%;
+  }
+  .close span {
+    font-size: 25px;
+    padding: 1px;
+  }
+}
+/* @media (max-width: 400px) {
+  .close {
+    left: 336px;
+  }
+} */
+@media (max-width: 300px) {
+  .main .close {
+    left: 230px;
+    top: 8px;
   }
 }

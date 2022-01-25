@@ -232,7 +232,7 @@ img {
 }
 @media (max-width: 550px) {
   .main_box {
-    padding: 3% 0.3%;
+    padding: 3% 0.2%;
     width: 100%;
   }
   .details_box {
@@ -252,6 +252,7 @@ img {
   }
   .features_box {
     font-size: 13px;
+    width: 90%;
   }
   .features_box h2 {
     border-radius: 5px;

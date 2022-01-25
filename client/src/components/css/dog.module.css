@@ -127,10 +127,12 @@
 @media (max-width: 550px) {
   .dog {
     font-size: 12px;
-    width: 250px;
+    width: 300px;
   }
   .img_container {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .name {
     width: 100%;

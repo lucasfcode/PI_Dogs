@@ -7,6 +7,8 @@
     #27a082,
     #1a5804
   );
+  animation: animateBg 28s ease infinite;
+
   background-size: 400% 100%;
   display: flex;
   flex-flow: row wrap;
@@ -15,6 +17,17 @@
   width: 100%;
   margin: auto;
   padding: 0px 10px;
+}
+@keyframes animateBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
 }
 
 /* .main_title {

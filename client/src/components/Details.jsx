@@ -117,28 +117,28 @@ export default function Details() {
             <p className={s.description_p}>{thisDog && thisDog.description}</p>
             {/* -----Características----- */}
             <h2>Características</h2>
-            <div>
+            <div className={s.features_divs}>
               <h4>Temperamento</h4>
               <p>{temperament}</p>
             </div>
-            <div>
+            <div className={s.features_divs}>
               <h4>Altura</h4>
               <p>{height} cm</p>
             </div>
-            <div>
+            <div className={s.features_divs}>
               <h4>Peso</h4>
               <p>{weight} Kilos</p>
             </div>
-            <div>
+            <div className={s.features_divs}>
               <h4>Promedio de vida</h4>
               <p>{thisDog && (thisDog.life_span || thisDog.yearsOfLife)} </p>
             </div>
-            <div>
+            <div className={s.features_divs}>
               <h4>Criado para</h4>
               <p>{thisDog && (thisDog.database ? "- " : thisDog.bred_for)}</p>
             </div>
 
-            <div>
+            <div className={s.features_divs}>
               <h4>Pertenece al grupo de razas</h4>
               <p translate="yes">
                 {thisDog && (thisDog.database ? " - " : thisDog.breed_group)}

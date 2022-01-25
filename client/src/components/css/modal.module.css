@@ -34,6 +34,17 @@
   display: none;
 }
 /* --------query-------- */
+
+@media (max-width: 1080px) {
+  .close {
+    left: 95%;
+    top: 1%;
+  }
+
+  .main img {
+    width: 88%;
+  }
+}
 @media (max-width: 550px) {
   .main {
     display: none;

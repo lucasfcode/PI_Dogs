@@ -229,6 +229,18 @@ img {
     top: 2%;
     right: 7%;
   }
+  .details_box {
+    width: 80%;
+  }
+  .name {
+    font-size: 30px;
+  }
+  .features_box h2 {
+    font-size: 25px;
+  }
+  .features_box div p {
+    font-size: 16px;
+  }
 }
 @media (max-width: 550px) {
   .main_box {
@@ -240,6 +252,7 @@ img {
     padding-left: 0%;
     padding-right: 0%;
   }
+
   .arrow {
     width: 50px;
     /* top: -5px; */
@@ -260,6 +273,10 @@ img {
     width: 100%;
     padding: 1%;
   }
+  .features_box div {
+    height: 6%;
+    padding: 1%;
+  }
   .features_box div h4 {
     width: 100%;
   }
@@ -267,6 +284,7 @@ img {
     width: 100%;
     text-align: center;
   }
+
   .arrow {
     padding-top: 5px;
   }

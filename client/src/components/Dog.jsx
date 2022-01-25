@@ -20,11 +20,16 @@ export default function Dog(props) {
         </Link>
       </div>
       <div className={`${cssDog.img_container}`}>
-        <img
-          src={props.aDog.image.url || props.aDog.image}
-          alt="Img_dog"
-          className={cssDog.img_card}
-        />
+        <Link
+          to={`/home/details/${props.aDog.id}`}
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <img
+            src={props.aDog.image.url || props.aDog.image}
+            alt="Img_dog"
+            className={cssDog.img_card}
+          />
+        </Link>
       </div>
 
       <div className={cssDog.info}>

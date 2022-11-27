@@ -4,44 +4,15 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-// const sequelize = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`,
-//   {
-//     logging: false, // set to console.log to see the raw SQL queries
-//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-//   }
-// );
-// const localhost = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`,
-//   {
-//     logging: false,
-//     native: false,
-//   }
-// );
+const localhost = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 
-// const productionHost = new Sequelize({
-//   database: "dghslq174tseu",
-//   dialect: "postgres",
-//   host: "ec2-3-226-165-74.compute-1.amazonaws.com",
-//   port: 5432,
-//   username: "whgdomjekeydup",
-//   password: "0be4f3ba927810502b1ac724e82000b712fa31bdcd956f754c23d6c36f946d93",
-//   pool: {
-//     max: 3,
-//     min: 1,
-//     idle: 10000,
-//   },
-//   dialectOptions: {
-//     ssl: {
-//       require: true,
-//       // Ref.: https://github.com/brianc/node-postgres/issues/2009
-//       rejectUnauthorized: false,
-//     },
-//     keepAlive: true,
-//   },
-//   ssl: true,
-// });
-const sequelize = new Sequelize({
+const productionHost = new Sequelize({
   database: "dghslq174tseu",
   dialect: "postgres",
   host: "ec2-3-226-165-74.compute-1.amazonaws.com",
@@ -64,6 +35,8 @@ const sequelize = new Sequelize({
   ssl: true,
 });
 
+const sequelize =
+  process.env.NODE_ENV === "production" ? productionHost : localhost;
 //lo de abajo vino por defecto
 const basename = path.basename(__filename);
 
